@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:merhaba/core/routing/app_router.dart';
+import 'package:merhaba/core/utils/controllers/auth_controller.dart';
 import 'package:merhaba/core/widgets/logo_boarding_light.dart';
 
 class WelcomeView extends StatefulWidget {
@@ -29,16 +30,30 @@ class _WelcomeViewState extends State<WelcomeView> {
     });
   }
 
+  Future<void> checkLogin() async {
+    try {
+      var res = await AuthController.checkLogin();
+      if (res["result"] == true) {
+        context.go(AppRouter.kHomeView);
+      } else {
+        context.go(AppRouter.kLoginView);
+      }
+    } catch (e) {
+      print(e.toString());
+      context.go(AppRouter.kLoginView);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-
-    startTimer();
+    // startTimer();
+    checkLogin();
   }
 
   @override
   void dispose() {
-    timer!.cancel();
+    //timer!.cancel();
     super.dispose();
   }
 
