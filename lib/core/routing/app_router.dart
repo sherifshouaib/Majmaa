@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:merhaba/features/home/presentation/views/home_view.dart';
+import 'package:merhaba/features/tabs/presentation/views/bottom_navbar_view.dart';
 import 'package:merhaba/features/login/presentation/manager/views/login_view.dart';
 import 'package:merhaba/features/create_account/presentation/views/create_account_view.dart';
 import 'package:merhaba/features/welcome/presentation/views/welcome_view.dart';
@@ -16,7 +16,7 @@ abstract class AppRouter {
       GoRoute(path: '/', builder: (context, state) => const WelcomeView()),
       GoRoute(path: kLoginView, builder: (context, state) => LoginView()),
       GoRoute(path: kCreateAccountView, builder: (context, state) => CreateAccountView()),
-      GoRoute(path: kHomeView, builder: (context, state) => HomeView()),
+      GoRoute(path: kHomeView, builder: (context, state) => BottomNavBarView()),
     ],
   );
 }
