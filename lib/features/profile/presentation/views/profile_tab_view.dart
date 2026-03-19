@@ -1,9 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:merhaba/core/helper/spacing.dart';
-import 'package:merhaba/core/utils/assets_utils.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
+import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_empty.dart';
+import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_filled.dart';
+import 'package:merhaba/features/profile/presentation/views/widgets/profile_options_inkwell.dart';
+import 'package:merhaba/features/profile/presentation/views/widgets/row_profile_data.dart';
 import 'package:provider/provider.dart';
 
 class ProfileTabView extends StatelessWidget {
@@ -25,238 +27,53 @@ class ProfileTabView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               profileTabProvider.photoUrl == ""
-                  ? Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        image: DecorationImage(
-                          image: AssetImage(AssetsUtils.profileAvatar),
-                        ),
-                      ),
-                    )
-                  : CachedNetworkImage(
-                      imageUrl: profileTabProvider.photoUrl,
-                      imageBuilder: (context, imageProvider) => Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image: DecorationImage(image: imageProvider),
-                        ),
-                      ),
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
+                  ? ProfileImageEmpty()
+                  : ProfileImageFilled(profileTabProvider: profileTabProvider),
             ],
           ),
           verticalSpace(20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.8,
-                child: Text(
-                  profileTabProvider.username,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+          RowProfileData(
+            profileTabProvider: profileTabProvider,
+            text: profileTabProvider.username,
+            color: Colors.grey,
+            fontsize: 18,
           ),
 
           verticalSpace(10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.8,
-                child: Text(
-                  profileTabProvider.email,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+
+          RowProfileData(
+            profileTabProvider: profileTabProvider,
+            text: profileTabProvider.email,
+            fontsize: 16,
           ),
+
           verticalSpace(10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.8,
-                child: Text(
-                  profileTabProvider.phone,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+          RowProfileData(
+            profileTabProvider: profileTabProvider,
+            text: profileTabProvider.phone,
+            color: Colors.grey,
+            fontsize: 14,
           ),
+
           verticalSpace(10),
           Divider(),
           verticalSpace(10),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(51, 96, 125, 139),
-
-                //     color: Colors.blueGrey.withOpacity(0.2),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
-                    child: Text(
-                      "Account Settings",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward_ios_outlined),
-                ],
-              ),
-            ),
-
-            onTap: () {},
-          ),
+          ProfileOptionsInkWell(text: "Account Settings"),
           verticalSpace(5),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(51, 96, 125, 139),
+          ProfileOptionsInkWell(text: "App Settings"),
 
-                //  color: Colors.blueGrey.withOpacity(0.2),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
-                    child: Text(
-                      "App Settings",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward_ios_outlined),
-                ],
-              ),
-            ),
-
-            onTap: () {},
-          ),
           verticalSpace(5),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(51, 96, 125, 139),
+          ProfileOptionsInkWell(text: "Preferences"),
 
-                // color: Colors.blueGrey.withOpacity(0.2),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
-                    child: Text(
-                      "Preferences",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward_ios_outlined),
-                ],
-              ),
-            ),
-
-            onTap: () {},
-          ),
           verticalSpace(5),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(51, 96, 125, 139),
-                // color: Colors.blueGrey.withOpacity(0.2),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
-                    child: Text(
-                      "Privacy",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward_ios_outlined),
-                ],
-              ),
-            ),
+          ProfileOptionsInkWell(text: "Privacy"),
 
-            onTap: () {},
-          ),
           verticalSpace(10),
           Divider(),
           verticalSpace(10),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(128, 255, 0, 0),
-
-                //  color: Colors.red.withOpacity(0.5),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
-                    child: Text(
-                      "Log Out",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward_ios_outlined),
-                ],
-              ),
-            ),
-
-            onTap: () {},
+          ProfileOptionsInkWell(
+            text: "Log Out",
+            color: const Color.fromARGB(128, 255, 0, 0),
           ),
         ],
       ),
