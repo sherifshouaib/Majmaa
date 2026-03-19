@@ -72,7 +72,7 @@ class ProfileTabView extends StatelessWidget {
           ),
 
           verticalSpace(10),
-            Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
@@ -80,17 +80,14 @@ class ProfileTabView extends StatelessWidget {
                 child: Text(
                   profileTabProvider.email,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
           ),
           verticalSpace(10),
-            Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
@@ -107,6 +104,159 @@ class ProfileTabView extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          verticalSpace(10),
+          Divider(),
+          verticalSpace(10),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(51, 96, 125, 139),
+
+                //     color: Colors.blueGrey.withOpacity(0.2),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
+                    child: Text(
+                      "Account Settings",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios_outlined),
+                ],
+              ),
+            ),
+
+            onTap: () {},
+          ),
+          verticalSpace(5),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(51, 96, 125, 139),
+
+                //  color: Colors.blueGrey.withOpacity(0.2),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
+                    child: Text(
+                      "App Settings",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios_outlined),
+                ],
+              ),
+            ),
+
+            onTap: () {},
+          ),
+          verticalSpace(5),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(51, 96, 125, 139),
+
+                // color: Colors.blueGrey.withOpacity(0.2),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
+                    child: Text(
+                      "Preferences",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios_outlined),
+                ],
+              ),
+            ),
+
+            onTap: () {},
+          ),
+          verticalSpace(5),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(51, 96, 125, 139),
+                // color: Colors.blueGrey.withOpacity(0.2),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
+                    child: Text(
+                      "Privacy",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios_outlined),
+                ],
+              ),
+            ),
+
+            onTap: () {},
+          ),
+          verticalSpace(10),
+          Divider(),
+          verticalSpace(10),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(128, 255, 0, 0),
+
+                //  color: Colors.red.withOpacity(0.5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
+                    child: Text(
+                      "Log Out",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios_outlined),
+                ],
+              ),
+            ),
+
+            onTap: () {},
           ),
         ],
       ),
