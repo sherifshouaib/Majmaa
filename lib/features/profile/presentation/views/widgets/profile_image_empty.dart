@@ -12,7 +12,7 @@ class ProfileImageEmpty extends StatelessWidget {
         width: 100,
         height: 100,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(60),
           image: DecorationImage(
             image: AssetImage(AssetsUtils.profileAvatar),
           ),

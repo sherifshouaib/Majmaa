@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:merhaba/core/utils/providers/bottom_navbar_view_provider.dart';
+import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
 import 'package:merhaba/features/home/presentation/views/home_tab_view.dart';
 import 'package:merhaba/features/profile/presentation/views/profile_tab_view.dart';
 import 'package:merhaba/features/tabs/presentation/views/friends_tab_view.dart';
 import 'package:merhaba/features/tabs/presentation/views/notifications_tab_view.dart';
 import 'package:merhaba/features/tabs/presentation/views/videos_tab_view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavBarViewBody extends StatelessWidget {
   const BottomNavBarViewBody({
@@ -30,6 +32,15 @@ class BottomNavBarViewBody extends StatelessWidget {
         NotificationsTabView(),
         ProfileTabView(),
       ],
+      onItemSelected: (value) {
+        if (value == 4) {
+          final profileTabProvider = Provider.of<ProfileTabProvider>(
+            context,
+            listen: false,
+          );
+          profileTabProvider.getData();
+        }
+      },
       items: [
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.home),

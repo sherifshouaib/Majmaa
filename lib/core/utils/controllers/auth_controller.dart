@@ -122,8 +122,7 @@ class AuthController {
     }
   }
 
-
- static Future<void> logOut() async {
+  static Future<void> logOut() async {
     try {
       try {
         await Supabase.instance.client.auth.signOut();
@@ -141,4 +140,39 @@ class AuthController {
     }
   }
 
+  static Future<Map<String, dynamic>> getCurrentUserData() async {
+    try {
+      var uid = await _secureStorage.read(key: "uid");
+
+      if (uid == null) {
+        return {"result": false, "message": "Please login again!!"};
+      }
+
+      var res = Supabase.instance.client.auth.currentUser!.toJson();
+
+      // print(res);
+
+      return {
+        "result": true,
+        "message": "Retrieved successfully .. ",
+        "data": res,
+      };
+    } catch (e) {
+      return {"result": false, "message": e.toString()};
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateCurrentUserData(
+    Map<String, dynamic> data,
+  ) async {
+    try {
+      await Supabase.instance.client.auth.updateUser(
+        UserAttributes(data: {...data}),
+      );
+      return {"result": true, "message": "Updated successfully ... "};
+    } catch (e) {
+      print(e.toString());
+      return {"result": false, "message": e.toString()};
+    }
+  }
 }

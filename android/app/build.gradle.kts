@@ -48,7 +48,7 @@ flavorDimensions += "default"
             resValue(
                 type = "string",
                 name = "app_name",
-                value = "Merhaba Production")
+                value = "Merhaba")
         }
     }
 
