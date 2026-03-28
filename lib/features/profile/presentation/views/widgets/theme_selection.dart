@@ -17,7 +17,7 @@ class ThemeSelection extends StatelessWidget {
       child: CupertinoSwitch(
         value: appSettingsProvider.isDark,
         onChanged: (bool value) {
-          appSettingsProvider.updateDarkMode(value);
+          appSettingsProvider.updateDarkMode(value,context);
         },
         activeColor: CupertinoColors.activeGreen,
       ),

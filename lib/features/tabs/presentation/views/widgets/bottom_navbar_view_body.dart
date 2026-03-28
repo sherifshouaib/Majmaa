@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:merhaba/core/utils/globals.dart';
 import 'package:merhaba/core/utils/providers/bottom_navbar_view_provider.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
 import 'package:merhaba/features/home/presentation/views/home_tab_view.dart';
@@ -46,31 +47,41 @@ class BottomNavBarViewBody extends StatelessWidget {
           icon: Icon(CupertinoIcons.home),
           title: ("Home"),
           activeColorPrimary: CupertinoColors.activeBlue,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Globals.theme == "Dark"
+              ? CupertinoColors.systemGrey
+              : CupertinoColors.white,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.group),
           title: ("Friends"),
           activeColorPrimary: CupertinoColors.activeBlue,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Globals.theme == "Dark"
+              ? CupertinoColors.systemGrey
+              : CupertinoColors.white,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.video_camera_solid),
           title: ("Videos"),
           activeColorPrimary: CupertinoColors.activeBlue,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Globals.theme == "Dark"
+              ? CupertinoColors.systemGrey
+              : CupertinoColors.white,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.notifications),
           title: ("Notifications"),
           activeColorPrimary: CupertinoColors.activeBlue,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Globals.theme == "Dark"
+              ? CupertinoColors.systemGrey
+              : CupertinoColors.white,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.account_circle_sharp),
           title: ("Profile"),
           activeColorPrimary: CupertinoColors.activeBlue,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          inactiveColorPrimary: Globals.theme == "Dark"
+              ? CupertinoColors.systemGrey
+              : CupertinoColors.white,
         ),
       ],
       handleAndroidBackButtonPress: true, // Default is true.
@@ -80,7 +91,9 @@ class BottomNavBarViewBody extends StatelessWidget {
       hideNavigationBarWhenKeyboardAppears: true,
       popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
       padding: const EdgeInsets.only(top: 8),
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Globals.theme == "Dark"
+          ? Colors.grey.shade900
+          : Colors.blueGrey,
       isVisible: bottomNavBarViewProvider.isVisible,
       // animationSettings: const NavBarAnimationSettings(
       //   navBarItemAnimation: ItemAnimationSettings(

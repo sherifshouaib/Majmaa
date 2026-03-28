@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:merhaba/core/helper/spacing.dart';
 import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/controllers/auth_controller.dart';
+import 'package:merhaba/core/utils/globals.dart';
+import 'package:merhaba/core/utils/providers/app_settings_provider.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/custom_profile_photo.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_empty.dart';
@@ -137,8 +139,6 @@ class ProfileTabView extends StatelessWidget {
                     ],
                   ),
                 );
-             
-             
               },
               child: CustomProfilePhoto(profileTabProvider: profileTabProvider),
             ),
@@ -175,6 +175,11 @@ class ProfileTabView extends StatelessWidget {
             ProfileOptionsInkWell(
               text: "App Settings",
               ontap: () {
+                final appSettingsProvider = Provider.of<AppSettingsProvider>(
+                  context,
+                  listen: false,
+                );
+                appSettingsProvider.setIsDark(Globals.theme == "Dark");
                 GoRouter.of(context).push(AppRouter.kAppSettingsView);
               },
             ),
@@ -206,4 +211,3 @@ class ProfileTabView extends StatelessWidget {
     );
   }
 }
-
