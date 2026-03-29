@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/utils/globals.dart';
 import 'package:merhaba/core/utils/providers/bottom_navbar_view_provider.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
@@ -45,7 +47,7 @@ class BottomNavBarViewBody extends StatelessWidget {
       items: [
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.home),
-          title: ("Home"),
+          title: (AppLocale.home_label.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -53,7 +55,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.group),
-          title: ("Friends"),
+          title: (AppLocale.friends_label.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -61,7 +63,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.video_camera_solid),
-          title: ("Videos"),
+          title: (AppLocale.videos_label.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -69,7 +71,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.notifications),
-          title: ("Notifications"),
+          title: (AppLocale.notifications_label.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -77,7 +79,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.account_circle_sharp),
-          title: ("Profile"),
+          title: (AppLocale.profile_label.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey

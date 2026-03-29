@@ -29,6 +29,7 @@ dependencies:
   cached_network_image: ^3.4.1
   path: ^1.9.1
   adaptive_theme: ^3.7.2
+  flutter_localization: ^0.3.3
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:flutter_localization/flutter_localization.dart';
+import 'package:merhaba/core/locale/app_locale.dart';
 class HomeTabView extends StatelessWidget {
   const HomeTabView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(centerTitle: true,title: const Text("Home Tab")),
+      appBar: AppBar(centerTitle: true,title:  Text(AppLocale.home_label.getString(context))),
     );
   }
 }

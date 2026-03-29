@@ -3,7 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/globals.dart';
 import 'package:merhaba/core/utils/providers/app_settings_provider.dart';
@@ -15,6 +17,7 @@ import 'package:merhaba/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+final FlutterLocalization localization = FlutterLocalization.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -29,6 +32,12 @@ void main() async {
       url: dotenv.env["SUPABASE_URL"].toString(),
       anonKey: dotenv.env["SUPABASE_KEY"].toString(),
     );
+  } catch (e) {
+    print(e.toString());
+  }
+
+  try {
+    await FlutterLocalization.instance.ensureInitialized();
   } catch (e) {
     print(e.toString());
   }
@@ -63,13 +72,36 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ProfileTabProvider()),
         ChangeNotifierProvider(create: (_) => AppSettingsProvider()),
       ],
-      child: const MyApp(),
+      child: const Merhaba(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Merhaba extends StatefulWidget {
+  const Merhaba({super.key});
+
+  @override
+  State<Merhaba> createState() => _MerhabaState();
+}
+
+class _MerhabaState extends State<Merhaba> {
+  @override
+  void initState() {
+    localization.init(
+      mapLocales: [
+        const MapLocale('en', AppLocale.EN),
+        const MapLocale('ar', AppLocale.AR),
+      ],
+      initLanguageCode: 'en',
+    );
+    localization.onTranslatedLanguage = _onTranslatedLanguage;
+    super.initState();
+  }
+
+  // the setState function here is a must to add
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +116,8 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return FluentApp.router(
             routerConfig: AppRouter.router,
-
+            supportedLocales: localization.supportedLocales,
+            localizationsDelegates: localization.localizationsDelegates,
             title: 'Merhaba App',
             theme: theme == ThemeData.light(useMaterial3: true)
                 ? FluentThemeData.light()

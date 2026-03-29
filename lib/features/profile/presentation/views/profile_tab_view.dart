@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:merhaba/core/helper/spacing.dart';
+import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/controllers/auth_controller.dart';
 import 'package:merhaba/core/utils/globals.dart';
@@ -28,7 +30,10 @@ class ProfileTabView extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(centerTitle: true, title: const Text("Profile Tab")),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(AppLocale.profile_label.getString(context)),
+        ),
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           shrinkWrap: true,
@@ -91,10 +96,10 @@ class ProfileTabView extends StatelessWidget {
                             // profileTabProvider.toggleLoading();
                           }
                         },
-                        child: Text('Camera'),
+                        child: Text(AppLocale.camera_label.getString(context)),
                       ),
                       FilledButton(
-                        child: const Text('Gallery'),
+                        child: Text(AppLocale.gallery_label.getString(context)),
                         onPressed: () async {
                           ImagePicker imagePicker = ImagePicker();
                           var file = await imagePicker.pickImage(
@@ -170,31 +175,32 @@ class ProfileTabView extends StatelessWidget {
             verticalSpace(10),
             Divider(),
             verticalSpace(10),
-            ProfileOptionsInkWell(text: "Account Settings", ontap: () {}),
+            ProfileOptionsInkWell(text: AppLocale.account_settings_label.getString(context), ontap: () {}),
             verticalSpace(5),
             ProfileOptionsInkWell(
-              text: "App Settings",
-              ontap: () {
+              text: AppLocale.app_settings_label.getString(context),
+              ontap: () async {
                 final appSettingsProvider = Provider.of<AppSettingsProvider>(
                   context,
                   listen: false,
                 );
+                await appSettingsProvider.getCurrentLanguage();
                 appSettingsProvider.setIsDark(Globals.theme == "Dark");
                 GoRouter.of(context).push(AppRouter.kAppSettingsView);
               },
             ),
 
             verticalSpace(5),
-            ProfileOptionsInkWell(text: "Preferences", ontap: () {}),
+            ProfileOptionsInkWell(text: AppLocale.preferences_label.getString(context), ontap: () {}),
 
             verticalSpace(5),
-            ProfileOptionsInkWell(text: "Privacy", ontap: () {}),
+            ProfileOptionsInkWell(text: AppLocale.privacy_label.getString(context), ontap: () {}),
 
             verticalSpace(10),
             Divider(),
             verticalSpace(10),
             ProfileOptionsInkWell(
-              text: "Log Out",
+              text: AppLocale.logout_label.getString(context),
               color: const Color.fromARGB(128, 255, 0, 0),
               ontap: () async {
                 try {
