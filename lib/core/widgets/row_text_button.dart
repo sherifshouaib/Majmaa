@@ -4,11 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:merhaba/core/routing/app_router.dart';
 
 class RowTextButton extends fluent.StatelessWidget {
-  const RowTextButton({
-    super.key, required this.buttonText,
-  });
+  const RowTextButton({super.key, required this.buttonText});
 
-final String buttonText;
+  final String buttonText;
   @override
   fluent.Widget build(fluent.BuildContext context) {
     return Row(
@@ -18,7 +16,10 @@ final String buttonText;
           onPressed: () {
             GoRouter.of(context).push(AppRouter.kCreateAccountView);
           },
-          child:  Text(buttonText),
+          child: Text(
+            buttonText,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );

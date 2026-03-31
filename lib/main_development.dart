@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,49 @@ import 'package:merhaba/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+
 final FlutterLocalization localization = FlutterLocalization.instance;
+
+final appLinks = AppLinks();
+
+Future<void> initDeepLink() async {
+  // 🔥 لو التطبيق كان مقفول
+  final uri = await appLinks.getInitialLink();
+
+  if (uri != null) {
+    debugPrint("🔥 Initial Link: $uri");
+    handleUri(uri); // ✅ استخدمها هنا
+  }
+
+  // 🔥 لو التطبيق مفتوح
+  appLinks.uriLinkStream.listen((uri) {
+    debugPrint("🔥 Stream Link: $uri");
+    handleUri(uri); // ✅ وهنا
+  });
+}
+
+void handleUri(Uri uri) {
+  debugPrint("🔥 FULL URI: $uri");
+
+  final code = uri.queryParameters['code'];
+  final isRecovery = uri.fragment.contains('type=recovery');
+  debugPrint("query: ${uri.queryParameters}");
+  debugPrint("fragment: ${uri.fragment}");
+  if (code != null || isRecovery) {
+    debugPrint("✅ Recovery flow detected");
+    Future.delayed(const Duration(milliseconds: 900), () {
+      AppRouter.router.push(AppRouter.kUpdatePasswordView);
+    });
+    //  AppRouter.router.push(AppRouter.kUpdatePasswordView);
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   try {
     await dotenv.load(fileName: ".env");
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
   }
 
   try {
@@ -33,13 +69,13 @@ void main() async {
       anonKey: dotenv.env["SUPABASE_KEY"].toString(),
     );
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
   }
 
   try {
     await FlutterLocalization.instance.ensureInitialized();
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
   }
 
   try {
@@ -47,7 +83,7 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
   }
 
   try {
@@ -60,7 +96,7 @@ void main() async {
       }
     }
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
   }
   // runApp(const MyApp());
   runApp(
@@ -87,6 +123,8 @@ class Merhaba extends StatefulWidget {
 class _MerhabaState extends State<Merhaba> {
   @override
   void initState() {
+    super.initState();
+
     localization.init(
       mapLocales: [
         const MapLocale('en', AppLocale.EN),
@@ -95,7 +133,9 @@ class _MerhabaState extends State<Merhaba> {
       initLanguageCode: 'en',
     );
     localization.onTranslatedLanguage = _onTranslatedLanguage;
-    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initDeepLink();
+    });
   }
 
   // the setState function here is a must to add

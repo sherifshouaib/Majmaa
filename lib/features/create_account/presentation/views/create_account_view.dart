@@ -153,7 +153,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                           );
                         }
                       } catch (e) {
-                        print(e.toString());
+                        debugPrint(e.toString());
                       }
 
                       createAccountProvider.toggleLoading();

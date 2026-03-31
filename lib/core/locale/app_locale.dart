@@ -105,6 +105,14 @@ mixin AppLocale {
   static const String choose_video_label = "Choose Video";
   static const String choose_photo_label = "Choose Photo";
   static const String choose_voice_label = "Choose Voice";
+  static const String forget_password_label = "Forget Password ?";
+  static const String forget_password_appbar_label = "Forget Password";
+  static const String send_reset_email_label = "Send Reset Email";
+  static const String resend_email_label = "Resend Email";
+  static const String update_password_label = "Update Password";
+  static const String new_password_label = "New Password";
+  static const String confirm_password_label = "Confirm Password";
+  static const String update_label = "Update";
 
   static const Map<String, dynamic> EN = {
     new_story_label: "New Story",
@@ -213,6 +221,14 @@ mixin AppLocale {
     logout_label: "Log Out",
     language_label: "Language",
     dark_mode_label: "Dark Mode",
+    forget_password_label: "Forget Password ?",
+    forget_password_appbar_label: "Forget Password",
+    send_reset_email_label: "Send Reset Email",
+    resend_email_label: "Resend Email",
+    update_password_label: "Update Password",
+    new_password_label: "New Password",
+    confirm_password_label: "Confirm Password",
+    update_label: "Update",
   };
 
   static const Map<String, dynamic> AR = {
@@ -322,5 +338,13 @@ mixin AppLocale {
     logout_label: "تسجيل الخروج",
     language_label: "اللغة",
     dark_mode_label: "الوضع الليلي",
+    forget_password_label: "نسيت كلمة المرور ؟",
+    forget_password_appbar_label: "نسيت كلمة المرور",
+    send_reset_email_label: "إرسال بريد إعادة ضبط كلمة السر",
+    resend_email_label: "إعادة إرسال البريد",
+    update_password_label: "تحديث كلمة المرور",
+    new_password_label: "كلمة المرور الجديدة",
+    confirm_password_label: "تأكيد كلمة المرور",
+    update_label: "تحديث",
   };
 }

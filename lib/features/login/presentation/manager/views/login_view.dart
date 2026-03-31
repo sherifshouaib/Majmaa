@@ -11,6 +11,7 @@ import 'package:merhaba/core/widgets/logo_boarding_light.dart';
 import 'package:merhaba/core/widgets/row_log_reg.dart';
 import 'package:merhaba/core/widgets/row_text_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:merhaba/features/login/presentation/manager/views/widgets/forget_password_button.dart';
 import 'package:merhaba/main_development.dart';
 import 'package:provider/provider.dart';
 
@@ -88,7 +89,7 @@ class LoginView extends StatelessWidget {
                           );
                         }
                       } catch (e) {
-                        print(e.toString());
+                        debugPrint(e.toString());
                       }
 
                       loginProvider.toggleLoading();
@@ -96,6 +97,10 @@ class LoginView extends StatelessWidget {
                   ),
 
                   verticalSpace(10),
+
+                  ForgetPasswordButton(),
+                  verticalSpace(10),
+
                   RowTextButton(
                     buttonText: AppLocale.create_account_label.getString(
                       context,

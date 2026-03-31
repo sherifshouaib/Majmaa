@@ -13,8 +13,6 @@ import 'package:merhaba/core/utils/globals.dart';
 import 'package:merhaba/core/utils/providers/app_settings_provider.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/custom_profile_photo.dart';
-import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_empty.dart';
-import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_filled.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/profile_options_inkwell.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/row_profile_data.dart';
 import 'package:provider/provider.dart';
@@ -71,7 +69,7 @@ class ProfileTabView extends StatelessWidget {
                               String extension = path.extension(file.path);
                               String fileName =
                                   "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
-                              //  print(fileName);
+                              //  debugPrint(fileName);
 
                               final String fullPath = await Supabase
                                   .instance
@@ -91,7 +89,7 @@ class ProfileTabView extends StatelessWidget {
                               );
                               Navigator.of(context).pop();
                             } catch (e) {
-                              print(e.toString());
+                              debugPrint(e.toString());
                             }
                             // profileTabProvider.toggleLoading();
                           }
@@ -115,7 +113,7 @@ class ProfileTabView extends StatelessWidget {
                               String extension = path.extension(file.path);
                               String fileName =
                                   "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
-                              //  print(fileName);
+                              //  debugPrint(fileName);
 
                               final String fullPath = await Supabase
                                   .instance
@@ -135,7 +133,7 @@ class ProfileTabView extends StatelessWidget {
                               );
                               Navigator.of(context).pop();
                             } catch (e) {
-                              print(e.toString());
+                              debugPrint(e.toString());
                             }
                             // profileTabProvider.toggleLoading();
                           }
@@ -206,7 +204,7 @@ class ProfileTabView extends StatelessWidget {
                 try {
                   await AuthController.logOut();
                 } catch (e) {
-                  print(e.toString());
+                  debugPrint(e.toString());
                 }
                 GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
               },

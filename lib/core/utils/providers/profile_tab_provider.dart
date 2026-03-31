@@ -31,7 +31,7 @@ class ProfileTabProvider with ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
     toggleLoading();
   }
@@ -49,10 +49,10 @@ class ProfileTabProvider with ChangeNotifier {
             ? ""
             : userData["picUrl"].toString();
         notifyListeners();
-        // print(res['data']);
+        // debugPrint(res['data']);
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -62,7 +62,7 @@ class ProfileTabProvider with ChangeNotifier {
     try {
       await getUserData();
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
     _isLoading = false;
     notifyListeners();

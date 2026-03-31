@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 class HomeTabView extends StatelessWidget {

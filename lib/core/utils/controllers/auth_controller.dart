@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -20,7 +21,7 @@ class AuthController {
       );
       await _secureStorage.write(key: "uid", value: data["uid"].toString());
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -31,7 +32,7 @@ class AuthController {
       await _secureStorage.delete(key: "login_password");
       await _secureStorage.delete(key: "uid");
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -53,7 +54,7 @@ class AuthController {
         "data": {...res.user!.toJson()},
       };
     } on AuthException catch (e) {
-      print(e.message.toString());
+      debugPrint(e.message.toString());
       return {"result": false, "message": e.message};
     }
   }
@@ -83,7 +84,7 @@ class AuthController {
         "data": {...res.user!.toJson()},
       };
     } on AuthException catch (e) {
-      print(e.message.toString());
+      debugPrint(e.message.toString());
       return {"result": false, "message": e.message};
     }
   }
@@ -97,7 +98,7 @@ class AuthController {
         return {"result": false, "message": "Please login again!!"};
       }
 
-      print(isLoggedIn);
+      debugPrint(isLoggedIn.toString());
 
       var email = await _secureStorage.read(key: "login_email");
       var password = await _secureStorage.read(key: "login_password");
@@ -117,7 +118,7 @@ class AuthController {
         "data": {...res.user!.toJson()},
       };
     } on AuthException catch (e) {
-      print(e.message.toString());
+      debugPrint(e.message.toString());
       return {"result": false, "message": e.message};
     }
   }
@@ -127,16 +128,16 @@ class AuthController {
       try {
         await Supabase.instance.client.auth.signOut();
       } catch (e) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
 
       try {
         await purgeAuth();
       } catch (e) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -150,7 +151,7 @@ class AuthController {
 
       var res = Supabase.instance.client.auth.currentUser!.toJson();
 
-      // print(res);
+      // debugPrint(res);
 
       return {
         "result": true,
@@ -171,7 +172,7 @@ class AuthController {
       );
       return {"result": true, "message": "Updated successfully ... "};
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return {"result": false, "message": e.toString()};
     }
   }

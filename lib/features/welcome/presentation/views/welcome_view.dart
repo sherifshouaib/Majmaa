@@ -17,7 +17,7 @@ class _WelcomeViewState extends State<WelcomeView> {
   Timer? timer;
   int timerStart = 2;
 
-  startTimer() {
+  void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timerStart == 0) {
         timer?.cancel();
@@ -39,7 +39,7 @@ class _WelcomeViewState extends State<WelcomeView> {
         context.go(AppRouter.kLoginView);
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       context.go(AppRouter.kLoginView);
     }
   }
