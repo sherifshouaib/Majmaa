@@ -49,7 +49,9 @@ class NewPostView extends StatelessWidget {
           centerTitle: true,
           actions: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                newPostProvider.onAdd(context);
+              },
               child: Text(AppLocale.save_label.getString(context)),
             ),
           ],
@@ -196,6 +198,7 @@ class NewPostView extends StatelessWidget {
 
                     // minLines: 3,
                     maxLines: null,
+                    controller: newPostProvider.textController,
                   ),
 
                   newPostProvider.media.isEmpty

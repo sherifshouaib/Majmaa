@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:merhaba/main_development.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthController {
-  static final FlutterSecureStorage _secureStorage = FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
-  );
+ 
 
   static Future<void> setAuth(Map<String, dynamic> data) async {
     try {
-      await _secureStorage.write(key: "is_logged_in", value: true.toString());
-      await _secureStorage.write(
+      await secureStorage.write(key: "is_logged_in", value: true.toString());
+      await secureStorage.write(
         key: "login_email",
         value: data["email"].toString(),
       );
-      await _secureStorage.write(
+      await secureStorage.write(
         key: "login_password",
         value: data["password"].toString(),
       );
-      await _secureStorage.write(key: "uid", value: data["uid"].toString());
+      await secureStorage.write(key: "uid", value: data["uid"].toString());
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -27,10 +24,10 @@ class AuthController {
 
   static Future<void> purgeAuth() async {
     try {
-      await _secureStorage.delete(key: "is_logged_in");
-      await _secureStorage.delete(key: "login_email");
-      await _secureStorage.delete(key: "login_password");
-      await _secureStorage.delete(key: "uid");
+      await secureStorage.delete(key: "is_logged_in");
+      await secureStorage.delete(key: "login_email");
+      await secureStorage.delete(key: "login_password");
+      await secureStorage.delete(key: "uid");
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -91,17 +88,17 @@ class AuthController {
 
   static Future<Map<String, dynamic>> checkLogin() async {
     try {
-      bool isLoggedIn = (await _secureStorage.read(key: "is_logged_in")) == null
+      bool isLoggedIn = (await secureStorage.read(key: "is_logged_in")) == null
           ? false
-          : bool.parse((await _secureStorage.read(key: "is_logged_in"))!);
+          : bool.parse((await secureStorage.read(key: "is_logged_in"))!);
       if (isLoggedIn == false) {
         return {"result": false, "message": "Please login again!!"};
       }
 
       debugPrint(isLoggedIn.toString());
 
-      var email = await _secureStorage.read(key: "login_email");
-      var password = await _secureStorage.read(key: "login_password");
+      var email = await secureStorage.read(key: "login_email");
+      var password = await secureStorage.read(key: "login_password");
 
       var res = await Supabase.instance.client.auth.signInWithPassword(
         password: password!,
@@ -143,7 +140,7 @@ class AuthController {
 
   static Future<Map<String, dynamic>> getCurrentUserData() async {
     try {
-      var uid = await _secureStorage.read(key: "uid");
+      var uid = await secureStorage.read(key: "uid");
 
       if (uid == null) {
         return {"result": false, "message": "Please login again!!"};

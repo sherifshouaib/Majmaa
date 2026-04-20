@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/globals.dart';
 import 'package:merhaba/core/utils/providers/app_settings_provider.dart';
 import 'package:merhaba/core/utils/providers/bottom_navbar_view_provider.dart';
+import 'package:merhaba/core/utils/providers/location_viewer_provider.dart';
 import 'package:merhaba/core/utils/providers/login_provider.dart';
 import 'package:merhaba/core/utils/providers/create_account_provider.dart';
 import 'package:merhaba/core/utils/providers/new_post_provider.dart';
@@ -19,8 +21,12 @@ import 'package:merhaba/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
 final FlutterLocalization localization = FlutterLocalization.instance;
+
+final FlutterSecureStorage secureStorage = FlutterSecureStorage(
+  aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+);
 
 final appLinks = AppLinks();
 
@@ -109,6 +115,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ProfileTabProvider()),
         ChangeNotifierProvider(create: (_) => AppSettingsProvider()),
         ChangeNotifierProvider(create: (_) => NewPostProvider()),
+        ChangeNotifierProvider(create: (_) => LocationViewerProvider()),
       ],
       child: const Merhaba(),
     ),
