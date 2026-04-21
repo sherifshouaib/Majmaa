@@ -38,9 +38,15 @@ class _WelcomeViewState extends State<WelcomeView> {
       var res = await AuthController.checkLogin();
       if (res["result"] == true) {
         getPostsAndNavigateMethod(context);
-      } else {
 
-        
+        // final timelineProvider = Provider.of<TimelineProvider>(
+        //   context,
+        //   listen: false,
+        // );
+        // await timelineProvider.getData();
+
+        // context.go(AppRouter.kHomeView);
+      } else {
         context.go(AppRouter.kLoginView);
       }
     } catch (e) {
@@ -48,8 +54,6 @@ class _WelcomeViewState extends State<WelcomeView> {
       context.go(AppRouter.kLoginView);
     }
   }
-
- 
 
   @override
   void initState() {

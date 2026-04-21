@@ -86,11 +86,14 @@ class LoginView extends StatelessWidget {
                         if (res["result"] == true) {
                           getPostsAndNavigateMethod(context);
 
-                          // final timelineProvider =
-                          //     Provider.of<TimelineProvider>(context);
-                          // timelineProvider.getData();
+                          //   final timelineProvider =
+                          //       Provider.of<TimelineProvider>(
+                          //         context,
+                          //         listen: false,
+                          //       );
+                          // await  timelineProvider.getData();
 
-                          // context.go(AppRouter.kHomeView);
+                          //   context.go(AppRouter.kHomeView);
                         } else {
                           Fluttertoast.showToast(
                             msg: res["message"].toString(),

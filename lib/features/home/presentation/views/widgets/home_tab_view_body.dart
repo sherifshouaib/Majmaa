@@ -4,6 +4,8 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
+import 'package:merhaba/core/utils/providers/timeline_provider.dart';
+import 'package:merhaba/features/home/presentation/views/widgets/post_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/helper/spacing.dart';
@@ -13,6 +15,7 @@ class HomeTabViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final timeLineProvider = Provider.of<TimelineProvider>(context);
     return ListView(
       padding: const EdgeInsets.only(bottom: 5),
       shrinkWrap: true,
@@ -48,7 +51,7 @@ class HomeTabViewBody extends StatelessWidget {
                         AppLocale.whats_on_your_mind_label.getString(context),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                        //  fontStyle: FontStyle.italic,
+                          //  fontStyle: FontStyle.italic,
                           fontSize: 14,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -65,11 +68,17 @@ class HomeTabViewBody extends StatelessWidget {
           ),
         ),
 
-Container(
-        height: 2,
-        color: const Color(0x8080DDFF),
-        margin: const EdgeInsets.symmetric(vertical: 5),
-      ).animate().scale(duration: 1200.ms, alignment: Alignment.centerLeft),
+        Container(
+          height: 2,
+          color: const Color(0x8080DDFF),
+          margin: const EdgeInsets.symmetric(vertical: 5),
+        ).animate().scale(duration: 1200.ms, alignment: Alignment.centerLeft),
+        ...timeLineProvider.posts.map((post) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: PostWidget(),
+          );
+        }),
       ],
     );
   }

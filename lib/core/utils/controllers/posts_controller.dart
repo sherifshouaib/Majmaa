@@ -66,7 +66,7 @@ class PostsController {
       );
 
       var userData =
-          currentUserData["data"]["user_metadata"] as Map<String, dynamic>;
+          currentUserData["user_metadata"] as Map<String, dynamic>;
 
       var username = userData["fullName"];
       var photoUrl = userData["picUrl"] == null
