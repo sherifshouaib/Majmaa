@@ -76,11 +76,9 @@ class HomeTabViewBody extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 5),
         ).animate().scale(duration: 1200.ms, alignment: Alignment.centerLeft),
         ...timeLineProvider.posts.map((post) {
-
           post["parsedContent"] = Map<String, dynamic>.from(
             jsonDecode(post["content"]) as Map,
           );
-
 
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 1),

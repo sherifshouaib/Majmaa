@@ -59,40 +59,76 @@ class ProfileTabView extends StatelessWidget {
                           ImagePicker imagePicker = ImagePicker();
                           var file = await imagePicker.pickImage(
                             source: ImageSource.camera,
-                            imageQuality: 50,
+                            imageQuality: 30,
                           );
                           if (file != null) {
-                            //    profileTabProvider.toggleLoading();
+                            profileTabProvider.toggleLoading();
+                            Navigator.of(context).pop();
+
                             try {
-                              String originalFilename = path.basename(
-                                file.path,
-                              );
-                              String extension = path.extension(file.path);
-                              String fileName =
-                                  "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
-                              //  debugPrint(fileName);
+                              final userId =
+                                  Supabase.instance.client.auth.currentUser!.id;
 
-                              final String fullPath = await Supabase
-                                  .instance
-                                  .client
-                                  .storage
+                              String fileName = "$userId.jpg";
+
+                              await Supabase.instance.client.storage
                                   .from('Users')
-                                  .upload(fileName, File(file.path));
+                                  .upload(
+                                    fileName,
+                                    File(file.path),
+                                    fileOptions: const FileOptions(
+                                      upsert: true,
+                                    ), // 🔥 المهم
+                                  );
 
-                              final String url = await Supabase
-                                  .instance
-                                  .client
-                                  .storage
-                                  .from("Users")
-                                  .getPublicUrl(fileName);
+                              final String url =
+                                  "${Supabase.instance.client.storage.from("Users").getPublicUrl(fileName)}?t=${DateTime.now().millisecondsSinceEpoch}";
+
                               await profileTabProvider.updateUserProfilePicture(
                                 url,
                               );
-                              Navigator.of(context).pop();
+
+                              await Supabase.instance.client
+                                  .from("posts")
+                                  .update({
+                                    "user_photo_updated_at": DateTime.now()
+                                        .toIso8601String(),
+                                  })
+                                  .eq("user_id", userId);
                             } catch (e) {
                               debugPrint(e.toString());
+
+                              // String originalFilename = path.basename(
+                              //   file.path,
+                              // );
+                              // String extension = path.extension(file.path);
+                              // String fileName =
+                              //     "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
+                              // //  debugPrint(fileName);
+
+                              // final String fullPath = await Supabase
+                              //     .instance
+                              //     .client
+                              //     .storage
+                              //     .from('Users')
+                              //     .upload(fileName, File(file.path));
+
+                              // final String url = await Supabase
+                              //     .instance
+                              //     .client
+                              //     .storage
+                              //     .from("Users")
+                              //     .getPublicUrl(fileName);
+                              // await profileTabProvider.updateUserProfilePicture(
+                              //   url,
+                              // );
+                              // Navigator.of(context).pop();
                             }
-                            // profileTabProvider.toggleLoading();
+
+                            // catch (e) {
+                            //   debugPrint(e.toString());
+                            // }
+                            profileTabProvider.toggleLoading();
                           }
                         },
                         child: Text(AppLocale.camera_label.getString(context)),
@@ -103,40 +139,70 @@ class ProfileTabView extends StatelessWidget {
                           ImagePicker imagePicker = ImagePicker();
                           var file = await imagePicker.pickImage(
                             source: ImageSource.gallery,
-                            imageQuality: 50,
+                            imageQuality: 30,
                           );
                           if (file != null) {
-                            //    profileTabProvider.toggleLoading();
+                            profileTabProvider.toggleLoading();
+                            Navigator.of(context).pop();
+
                             try {
-                              String originalFilename = path.basename(
-                                file.path,
-                              );
-                              String extension = path.extension(file.path);
-                              String fileName =
-                                  "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
-                              //  debugPrint(fileName);
+                              final userId =
+                                  Supabase.instance.client.auth.currentUser!.id;
 
-                              final String fullPath = await Supabase
-                                  .instance
-                                  .client
-                                  .storage
+                              String fileName = "$userId.jpg";
+
+                              await Supabase.instance.client.storage
                                   .from('Users')
-                                  .upload(fileName, File(file.path));
+                                  .upload(
+                                    fileName,
+                                    File(file.path),
+                                    fileOptions: const FileOptions(
+                                      upsert: true,
+                                    ), // 🔥 المهم
+                                  );
 
-                              final String url = await Supabase
-                                  .instance
-                                  .client
-                                  .storage
-                                  .from("Users")
-                                  .getPublicUrl(fileName);
+                              final String url =
+                                  "${Supabase.instance.client.storage.from("Users").getPublicUrl(fileName)}?t=${DateTime.now().millisecondsSinceEpoch}";
+
                               await profileTabProvider.updateUserProfilePicture(
                                 url,
                               );
-                              Navigator.of(context).pop();
+                              await Supabase.instance.client
+                                  .from("posts")
+                                  .update({
+                                    "user_photo_updated_at": DateTime.now()
+                                        .toIso8601String(),
+                                  })
+                                  .eq("user_id", userId);
+                              // String originalFilename = path.basename(
+                              //   file.path,
+                              // );
+                              // String extension = path.extension(file.path);
+                              // String fileName =
+                              //     "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
+                              // //  debugPrint(fileName);
+
+                              // final String fullPath = await Supabase
+                              //     .instance
+                              //     .client
+                              //     .storage
+                              //     .from('Users')
+                              //     .upload(fileName, File(file.path));
+
+                              // final String url = await Supabase
+                              //     .instance
+                              //     .client
+                              //     .storage
+                              //     .from("Users")
+                              //     .getPublicUrl(fileName);
+                              // await profileTabProvider.updateUserProfilePicture(
+                              //   url,
+                              // );
+                              // Navigator.of(context).pop();
                             } catch (e) {
                               debugPrint(e.toString());
                             }
-                            // profileTabProvider.toggleLoading();
+                            profileTabProvider.toggleLoading();
                           }
                         },
                       ),

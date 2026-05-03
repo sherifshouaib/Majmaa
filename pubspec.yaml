@@ -35,6 +35,7 @@ dependencies:
   flick_video_player: ^0.9.0
   flutter_osm_plugin: ^1.4.3
   flutter_animate: ^4.5.2
+  swipe_refresh: ^1.1.2
 
   
 dev_dependencies:

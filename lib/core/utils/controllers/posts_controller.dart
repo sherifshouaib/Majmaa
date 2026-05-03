@@ -65,8 +65,7 @@ class PostsController {
         currentUserDataRes["data"] as Map,
       );
 
-      var userData =
-          currentUserData["user_metadata"] as Map<String, dynamic>;
+      var userData = currentUserData["user_metadata"] as Map<String, dynamic>;
 
       var username = userData["fullName"];
       var photoUrl = userData["picUrl"] == null
@@ -80,7 +79,9 @@ class PostsController {
       data["updated_by"] = uid;
       data["date_added"] = DateTime.now().toIso8601String();
       data["date_updated"] = DateTime.now().toIso8601String();
+      data["user_photo_updated_at"] = DateTime.now().toIso8601String();
 
+      
       await Supabase.instance.client.from("posts").insert(data);
 
       return {"result": true, "message": "Posted successfully ... "};

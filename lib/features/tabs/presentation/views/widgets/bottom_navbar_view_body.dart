@@ -5,6 +5,7 @@ import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/utils/globals.dart';
 import 'package:merhaba/core/utils/providers/bottom_navbar_view_provider.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
+import 'package:merhaba/core/utils/providers/timeline_provider.dart';
 import 'package:merhaba/features/home/presentation/views/home_tab_view.dart';
 import 'package:merhaba/features/profile/presentation/views/profile_tab_view.dart';
 import 'package:merhaba/features/tabs/presentation/views/friends_tab_view.dart';
@@ -36,6 +37,15 @@ class BottomNavBarViewBody extends StatelessWidget {
         ProfileTabView(),
       ],
       onItemSelected: (value) {
+        if (value == 0) {
+          final timeLineProvider = Provider.of<TimelineProvider>(
+            context,
+            listen: false,
+          );
+
+          timeLineProvider.getData();
+        }
+
         if (value == 4) {
           final profileTabProvider = Provider.of<ProfileTabProvider>(
             context,

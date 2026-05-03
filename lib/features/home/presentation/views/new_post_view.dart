@@ -76,7 +76,6 @@ class NewPostView extends StatelessWidget {
                       horizontalSpace(15),
                       SizedBox(
                         width: (MediaQuery.sizeOf(context).width - 65) * 0.4,
-
                         child: Text(
                           profileTabProvider.username,
                           textAlign: TextAlign.start,
