@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_localization/flutter_localization.dart';
-import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/utils/providers/timeline_provider.dart';
 import 'package:merhaba/features/home/presentation/views/widgets/home_tab_view_body.dart';
 import 'package:provider/provider.dart';

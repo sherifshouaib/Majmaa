@@ -4,12 +4,16 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:flutter_reaction_button/flutter_reaction_button.dart';
 import 'package:merhaba/core/helper/spacing.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
+import 'package:merhaba/core/utils/providers/timeline_provider.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_empty.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../../../core/utils/globals.dart';
 
 class PostWidget extends StatefulWidget {
   const PostWidget({super.key, required this.post});
@@ -24,8 +28,10 @@ class _PostWidgetState extends State<PostWidget> {
   CarouselSliderController _controller = CarouselSliderController();
   int currentIndex = 0;
 
-  final baseUrl =
-      "https://iopikpwzkhllrxvixygw.supabase.co/storage/v1/object/public/Users/";
+  String selectedReaction = "like";
+
+  // final baseUrl =
+  //     "https://iopikpwzkhllrxvixygw.supabase.co/storage/v1/object/public/Users/";
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +41,10 @@ class _PostWidgetState extends State<PostWidget> {
     );
     final photoUpdatedAt = widget.post["user_photo_updated_at"] ?? "";
 
+    final timeLineProvider = Provider.of<TimelineProvider>(
+      context,
+      listen: true,
+    );
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -240,17 +250,93 @@ class _PostWidgetState extends State<PostWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                      
                         ElevatedButton.icon(
                           onPressed: () {},
                           label: Text(
-                            AppLocale.like_label.getString(context),
+                            timeLineProvider
+                                .getAvailableReactions(context)
+                                .where(
+                                  (reaction) =>
+                                      reaction["value"] == selectedReaction,
+                                )
+                                .first["text"],
+
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
-                          icon: Icon(fluent.FluentIcons.like, size: 15),
+                          icon: ReactionButton<String>(
+                            boxColor: Globals.theme == "Light"
+                                ? Colors.white
+                                : Colors.black,
+                            itemSize: Size(30, 30),
+
+                            onReactionChanged: (Reaction<String>? reaction) {
+                              //debugPrint('Selected value: ${reaction?.value}');
+
+                              if (reaction == null) {
+                                return;
+                              }
+                              if (reaction.value == null) {
+                                return;
+                              }
+                              setState(() {
+                                selectedReaction = reaction!.value!;
+                              });
+                            },
+                            reactions: <Reaction<String>>[
+                              ...timeLineProvider
+                                  .getAvailableReactions(context)
+                                  .map(
+                                    (reaction) => Reaction<String>(
+                                      value: reaction["value"],
+                                      icon: reaction["icon"],
+                                      title: Text(
+                                        reaction["text"],
+                                        //style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                            ],
+
+                            selectedReaction: Reaction(
+                              value: timeLineProvider
+                                  .getAvailableReactions(context)
+                                  .where(
+                                    (reaction) =>
+                                        reaction["value"] == selectedReaction,
+                                  )
+                                  .first["value"],
+                              icon: timeLineProvider
+                                  .getAvailableReactions(context)
+                                  .where(
+                                    (reaction) =>
+                                        reaction["value"] == selectedReaction,
+                                  )
+                                  .first["icon"],
+                              title: Text(
+                                timeLineProvider
+                                    .getAvailableReactions(context)
+                                    .where(
+                                      (reaction) =>
+                                          reaction["value"] == selectedReaction,
+                                    )
+                                    .first["text"],
+                              ),
+                            ),
+
+                            // selectedReaction: Reaction<String>(
+                            //   value: 'like',
+                            //   icon: const Icon(fluent.FluentIcons.like),
+                            //   title: Text(
+                            //     AppLocale.like_label.getString(context),
+                            //   ),
+                            // ),
+                          ),
+
                           style: ButtonStyle(
                             elevation: WidgetStatePropertyAll(1),
                             visualDensity: VisualDensity.compact,
