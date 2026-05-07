@@ -134,7 +134,7 @@ class _PostWidgetState extends State<PostWidget> {
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                    //  color: Colors.grey,
+                                      //  color: Colors.grey,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -269,12 +269,18 @@ class _PostWidgetState extends State<PostWidget> {
                                           : Container(
                                               child: FlickVideoPlayer(
                                                 flickManager: FlickManager(
+                                                  autoPlay: false,
                                                   videoPlayerController:
                                                       VideoPlayerController.networkUrl(
                                                         Uri.parse(
                                                           item["url"]
                                                               .toString(),
                                                         ),
+                                                        videoPlayerOptions:
+                                                            VideoPlayerOptions(
+                                                              allowBackgroundPlayback:
+                                                                  false,
+                                                            ),
                                                       ),
                                                 ),
                                               ),

@@ -103,7 +103,7 @@ class TimelineProvider with ChangeNotifier {
     toggleLoading();
     try {
       var res = await PostsController.getAllPosts();
-      _posts = res;
+      _posts = res.reversed.toList();
       notifyListeners();
     } catch (e) {
       debugPrint(e.toString());
