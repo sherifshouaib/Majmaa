@@ -5,12 +5,17 @@ import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_reaction_button/flutter_reaction_button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:merhaba/core/helper/spacing.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
+import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
 import 'package:merhaba/core/utils/providers/timeline_provider.dart';
+import 'package:merhaba/core/widgets/photo_viewer_screen.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/profile_image_empty.dart';
+import 'package:merhaba/main_development.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/utils/globals.dart';
@@ -114,21 +119,64 @@ class _PostWidgetState extends State<PostWidget> {
                             //   width: 30,
                             //   profileTabProvider: profileTabProvider,
                             // ),
-                            horizontalSpace(15),
-                            SizedBox(
-                              width:
-                                  (MediaQuery.sizeOf(context).width - 65) * 0.4,
+                            horizontalSpace(10),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  width:
+                                      (MediaQuery.sizeOf(context).width - 65) *
+                                      0.4,
 
-                              child: Text(
-                                widget.post["username"].toString(),
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey,
+                                  child: Text(
+                                    widget.post["username"].toString(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    //  color: Colors.grey,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                                SizedBox(
+                                  width:
+                                      (MediaQuery.sizeOf(context).width - 65) *
+                                      0.4,
+
+                                  child: Text(
+                                    timeago.format(
+                                      DateTime.parse(
+                                        widget.post["date_added"].toString(),
+                                      ),
+                                      locale:
+                                          localization
+                                                  .currentLocale
+                                                  .localeIdentifier ==
+                                              'ar'
+                                          ? "ar"
+                                          : localization
+                                                    .currentLocale
+                                                    .localeIdentifier ==
+                                                'en'
+                                          ? 'en_short'
+                                          : localization
+                                                .currentLocale
+                                                .localeIdentifier,
+
+                                      //  "${localization.currentLocale.localeIdentifier}_short",
+                                    ),
+                                    // widget.post["username"].toString(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blueGrey[400],
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -174,11 +222,35 @@ class _PostWidgetState extends State<PostWidget> {
                                                   (
                                                     context,
                                                     imageProvider,
-                                                  ) => Container(
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.cover,
+                                                  ) => InkWell(
+                                                    onTap: () {
+                                                      GoRouter.of(context).push(
+                                                        AppRouter
+                                                            .kPhotoViewerScreen,
+
+                                                        extra: item["url"]
+                                                            .toString(),
+                                                      );
+
+                                                      // Navigator.of(
+                                                      //   context,
+                                                      // ).push(
+                                                      //   MaterialPageRoute(
+                                                      //     builder: (context) {
+                                                      //       return PhotoViewerScreen(
+                                                      //         url: item["url"]
+                                                      //             .toString(),
+                                                      //       );
+                                                      //     },
+                                                      //   ),
+                                                      // );
+                                                    },
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -250,7 +322,6 @@ class _PostWidgetState extends State<PostWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                      
                         ElevatedButton.icon(
                           onPressed: () {},
                           label: Text(

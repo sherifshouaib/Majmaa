@@ -21,6 +21,7 @@ import 'package:merhaba/core/utils/providers/timeline_provider.dart';
 import 'package:merhaba/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 final FlutterLocalization localization = FlutterLocalization.instance;
 
@@ -106,6 +107,13 @@ void main() async {
   } catch (e) {
     debugPrint(e.toString());
   }
+
+  try {
+    timeago.setLocaleMessages('ar', timeago.ArMessages());
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+
   // runApp(const MyApp());
   runApp(
     MultiProvider(

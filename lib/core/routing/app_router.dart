@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:merhaba/core/widgets/photo_viewer_screen.dart';
 import 'package:merhaba/features/home/presentation/views/location_viewer_view.dart';
 import 'package:merhaba/features/home/presentation/views/new_post_view.dart';
 import 'package:merhaba/features/login/presentation/manager/views/forget_password_view.dart';
@@ -20,6 +21,7 @@ abstract class AppRouter {
   static const kUpdatePasswordView = '/updatePasswordView';
   static const kNewPostView = '/newPostView';
   static const klocationViewerView = '/locationViewerView';
+  static const kPhotoViewerScreen = '/photoViewerScreen';
 
   static final router = GoRouter(
     routes: [
@@ -48,6 +50,10 @@ abstract class AppRouter {
         builder: (context, state) => const UpdatePasswordView(),
       ),
       GoRoute(path: kNewPostView, builder: (context, state) => NewPostView()),
+      GoRoute(
+        path: kPhotoViewerScreen,
+        builder: (context, state) => PhotoViewerScreen(url: state.extra as String?,),
+      ),
     ],
   );
 }
