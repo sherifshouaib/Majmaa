@@ -50,6 +50,7 @@ class CommentsController {
         "username": username,
         "user_photo": photoUrl,
         "reply_to": -1,
+        "user_photo_updated_at": DateTime.now().toIso8601String(),
         ...data,
       };
 
@@ -118,6 +119,8 @@ class CommentsController {
         "active": true,
         "username": username,
         "user_photo": photoUrl,
+        "user_photo_updated_at": DateTime.now().toIso8601String(),
+
         ...data,
       };
 

@@ -95,6 +95,14 @@ class ProfileTabView extends StatelessWidget {
                                         .toIso8601String(),
                                   })
                                   .eq("user_id", userId);
+
+                              await Supabase.instance.client
+                                  .from("post_comments")
+                                  .update({
+                                    "user_photo_updated_at": DateTime.now()
+                                        .toIso8601String(),
+                                  })
+                                  .eq("user_id", userId);
                             } catch (e) {
                               debugPrint(e.toString());
 
@@ -174,31 +182,14 @@ class ProfileTabView extends StatelessWidget {
                                         .toIso8601String(),
                                   })
                                   .eq("user_id", userId);
-                              // String originalFilename = path.basename(
-                              //   file.path,
-                              // );
-                              // String extension = path.extension(file.path);
-                              // String fileName =
-                              //     "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
-                              // //  debugPrint(fileName);
 
-                              // final String fullPath = await Supabase
-                              //     .instance
-                              //     .client
-                              //     .storage
-                              //     .from('Users')
-                              //     .upload(fileName, File(file.path));
-
-                              // final String url = await Supabase
-                              //     .instance
-                              //     .client
-                              //     .storage
-                              //     .from("Users")
-                              //     .getPublicUrl(fileName);
-                              // await profileTabProvider.updateUserProfilePicture(
-                              //   url,
-                              // );
-                              // Navigator.of(context).pop();
+                              await Supabase.instance.client
+                                  .from("post_comments")
+                                  .update({
+                                    "user_photo_updated_at": DateTime.now()
+                                        .toIso8601String(),
+                                  })
+                                  .eq("user_id", userId);
                             } catch (e) {
                               debugPrint(e.toString());
                             }

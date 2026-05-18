@@ -121,7 +121,6 @@ class _PostWidgetState extends State<PostWidget> {
                 Container(
                   width: MediaQuery.sizeOf(context).width - 28,
 
-                  //  height: 400,
                   decoration: BoxDecoration(
                     color: Colors.blueGrey.withOpacity(0.25),
                     borderRadius: BorderRadius.circular(10),
@@ -174,12 +173,6 @@ class _PostWidgetState extends State<PostWidget> {
                                 ],
                               ),
 
-                              // CustomProfilePhoto(
-                              //   //  post: widget.post,
-                              //   height: 30,
-                              //   width: 30,
-                              //   profileTabProvider: profileTabProvider,
-                              // ),
                               horizontalSpace(10),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -283,38 +276,32 @@ class _PostWidgetState extends State<PostWidget> {
                                             ? CachedNetworkImage(
                                                 imageUrl: item["url"]
                                                     .toString(),
-                                                imageBuilder: (context, imageProvider) => InkWell(
-                                                  onTap: () {
-                                                    GoRouter.of(context).push(
-                                                      AppRouter
-                                                          .kPhotoViewerScreen,
+                                                imageBuilder:
+                                                    (
+                                                      context,
+                                                      imageProvider,
+                                                    ) => InkWell(
+                                                      onTap: () {
+                                                        GoRouter.of(
+                                                          context,
+                                                        ).push(
+                                                          AppRouter
+                                                              .kPhotoViewerScreen,
 
-                                                      extra: item["url"]
-                                                          .toString(),
-                                                    );
-
-                                                    // Navigator.of(
-                                                    //   context,
-                                                    // ).push(
-                                                    //   MaterialPageRoute(
-                                                    //     builder: (context) {
-                                                    //       return PhotoViewerScreen(
-                                                    //         url: item["url"]
-                                                    //             .toString(),
-                                                    //       );
-                                                    //     },
-                                                    //   ),
-                                                    // );
-                                                  },
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.cover,
+                                                          extra: item["url"]
+                                                              .toString(),
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image:
+                                                                imageProvider,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ),
                                                 placeholder: (context, url) =>
                                                     Center(
                                                       child:

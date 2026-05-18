@@ -47,10 +47,6 @@ class PostsController {
     }
   }
 
-
-
-
-
   static Future<Map<String, dynamic>> addPost(Map<String, dynamic> data) async {
     try {
       var uid = await secureStorage.read(key: "uid");
@@ -85,7 +81,6 @@ class PostsController {
       data["date_updated"] = DateTime.now().toIso8601String();
       data["user_photo_updated_at"] = DateTime.now().toIso8601String();
 
-      
       await Supabase.instance.client.from("posts").insert(data);
 
       return {"result": true, "message": "Posted successfully ... "};

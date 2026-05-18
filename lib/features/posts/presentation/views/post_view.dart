@@ -5,6 +5,7 @@ import 'package:merhaba/core/helper/spacing.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/utils/providers/post_provider.dart';
 import 'package:merhaba/features/home/presentation/views/widgets/post_widget.dart';
+import 'package:merhaba/features/posts/presentation/views/widgets/comment_widget.dart';
 import 'package:merhaba/main_development.dart';
 import 'package:provider/provider.dart';
 
@@ -25,19 +26,30 @@ class PostView extends StatelessWidget {
             title: Text(AppLocale.post_label.getString(context)),
           ),
           body: Stack(
-            // padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-
-            // shrinkWrap: true,
-            // physics: ClampingScrollPhysics(),
             children: [
-              PostWidget(
-                post: postProvider.currentPost,
-                showActions: true,
-                canNavigate: false,
-              ),
-              verticalSpace(10),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  PostWidget(
+                    post: postProvider.currentPost,
+                    showActions: true,
+                    canNavigate: false,
+                  ),
+                  verticalSpace(10),
 
-              // Comments here
+                  // Comments here
+                  ...postProvider.comments.map(
+                    (comment) => Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                      child: CommentWidget(
+                        comment: comment,
+                      //  post: postProvider.currentPost,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
@@ -55,7 +67,13 @@ class PostView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                     children: [
-                      IconButton(icon: Icon(Icons.add), onPressed: () {}),
+                      InkWell(child: Icon(Icons.add), onTap: () {}),
+                      horizontalSpace(10),
+                      InkWell(
+                        child: Icon(Icons.photo_camera_outlined),
+                        onTap: () {},
+                      ),
+                      horizontalSpace(10),
 
                       Expanded(
                         child: fluent.TextBox(
@@ -65,12 +83,20 @@ class PostView extends StatelessWidget {
                           expands: false,
                           controller: postProvider.newCommentController,
                           focusNode: postProvider.newCommentFocusNode,
+                          onChanged: (value) {
+                            postProvider.setIsNewCommentEmpty(value.isEmpty);
+                          },
                         ),
                       ),
-                      IconButton(
-                        icon: Icon(Icons.photo_camera_outlined),
-                        onPressed: () {},
-                      ),
+
+                      horizontalSpace(10),
+                      if (!(postProvider.isNewCommentEmpty))
+                        InkWell(
+                          child: Icon(Icons.send),
+                          onTap: () async {
+                            await postProvider.onAdd(context);
+                          },
+                        ),
                     ],
                   ),
                 ),
