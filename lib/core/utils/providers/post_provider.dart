@@ -25,6 +25,14 @@ class PostProvider with ChangeNotifier {
   List<Map<String, dynamic>> _comments = [];
   List<Map<String, dynamic>> get comments => _comments;
 
+  String _addMediaUrl = "";
+  String get addMediaUrl => _addMediaUrl;
+
+  setAddMediaUrl(String value) {
+    _addMediaUrl = value;
+    notifyListeners();
+  }
+
   setComments(List<Map<String, dynamic>> value) {
     _comments = value;
     notifyListeners();
@@ -65,6 +73,76 @@ class PostProvider with ChangeNotifier {
       var text = newCommentController.text;
 
       Map<String, dynamic> content = {"text": text, "media": ""};
+
+      _newCommentController.clear();
+      _isNewCommentEmpty = true;
+      notifyListeners();
+
+      var res = await CommentsController.addComment({
+        "content": jsonEncode(content),
+        "post_id": _currentPost["id"],
+      });
+      if (res["result"] == true) {
+        Fluttertoast.showToast(
+          msg: AppLocale.posted_successfully_label.getString(context),
+        );
+
+        getComments();
+
+        // TODO: send notification to post owner for the comment
+      } else {
+        Fluttertoast.showToast(
+          msg: AppLocale.something_went_wrong_label.getString(context),
+        );
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> onAddPhoto(BuildContext context) async {
+    try {
+      var text = newCommentController.text;
+
+      Map<String, dynamic> content = {
+        "text": text,
+        "media": {"url": _addMediaUrl, "type": "photo"},
+      };
+
+      _newCommentController.clear();
+      _isNewCommentEmpty = true;
+      notifyListeners();
+
+      var res = await CommentsController.addComment({
+        "content": jsonEncode(content),
+        "post_id": _currentPost["id"],
+      });
+      if (res["result"] == true) {
+        Fluttertoast.showToast(
+          msg: AppLocale.posted_successfully_label.getString(context),
+        );
+
+        getComments();
+
+        // TODO: send notification to post owner for the comment
+      } else {
+        Fluttertoast.showToast(
+          msg: AppLocale.something_went_wrong_label.getString(context),
+        );
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> onAddVideo(BuildContext context) async {
+    try {
+      var text = newCommentController.text;
+
+      Map<String, dynamic> content = {
+        "text": text,
+        "media": {"url": _addMediaUrl, "type": "video"},
+      };
 
       _newCommentController.clear();
       _isNewCommentEmpty = true;

@@ -24,6 +24,12 @@ class CommentWidget extends StatelessWidget {
     final photoUpdatedAt = comment["user_photo_updated_at"] ?? "";
 
     return Container(
+      margin: localization.currentLocale.localeIdentifier == "ar"
+          ? EdgeInsets.only(left: (MediaQuery.sizeOf(context).width - 60) * 0.35)
+          : EdgeInsets.only(
+              right: (MediaQuery.sizeOf(context).width - 60) * 0.35,
+            ),
+      width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.blueGrey.withOpacity(0.25),
@@ -35,86 +41,91 @@ class CommentWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      (comment["user_photo"] ?? "").isEmpty
-                          ? ProfileImageEmpty(height: 30, width: 30)
-                          : CachedNetworkImage(
-                              imageUrl:
-                                  "${comment["user_photo"]}?t=$photoUpdatedAt",
+              SizedBox(
+                width: (MediaQuery.sizeOf(context).width - 60) * 0.55,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        (comment["user_photo"] ?? "").isEmpty
+                            ? ProfileImageEmpty(height: 30, width: 30)
+                            : CachedNetworkImage(
+                                imageUrl:
+                                    "${comment["user_photo"]}?t=$photoUpdatedAt",
 
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(60),
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(60),
+                                        image: DecorationImage(
+                                          image: imageProvider,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                      ],
+                    ),
+
+                    horizontalSpace(10),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: (MediaQuery.sizeOf(context).width - 60) * 0.2,
+
+                          child: Text(
+                            comment["username"].toString(),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              //  color: Colors.grey,
                             ),
-                    ],
-                  ),
-
-                  horizontalSpace(10),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        width: (MediaQuery.sizeOf(context).width - 65) * 0.4,
-
-                        child: Text(
-                          comment["username"].toString(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            //  color: Colors.grey,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      SizedBox(
-                        width: (MediaQuery.sizeOf(context).width - 65) * 0.4,
+                        SizedBox(
+                          width: (MediaQuery.sizeOf(context).width - 60) * 0.2,
 
-                        child: Text(
-                          timeago.format(
-                            DateTime.parse(comment["date_added"].toString()),
-                            locale:
-                                localization.currentLocale.localeIdentifier ==
-                                    'ar'
-                                ? "ar"
-                                : localization.currentLocale.localeIdentifier ==
-                                      'en'
-                                ? 'en_short'
-                                : localization.currentLocale.localeIdentifier,
+                          child: Text(
+                            timeago.format(
+                              DateTime.parse(comment["date_added"].toString()),
+                              locale:
+                                  localization.currentLocale.localeIdentifier ==
+                                      'ar'
+                                  ? "ar"
+                                  : localization
+                                            .currentLocale
+                                            .localeIdentifier ==
+                                        'en'
+                                  ? 'en_short'
+                                  : localization.currentLocale.localeIdentifier,
 
-                            //  "${localization.currentLocale.localeIdentifier}_short",
+                              //  "${localization.currentLocale.localeIdentifier}_short",
+                            ),
+                            // widget.post["username"].toString(),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey[400],
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          // widget.post["username"].toString(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueGrey[400],
-                          ),
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -125,7 +136,7 @@ class CommentWidget extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                  width: (MediaQuery.sizeOf(context).width - 60) * 0.95,
+                  width: (MediaQuery.sizeOf(context).width - 60) * 0.55,
                   child: Text(
                     parsedContent["text"].toString(),
                     style: TextStyle(
@@ -136,6 +147,19 @@ class CommentWidget extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          verticalSpace(5),
+          if (parsedContent["media"] != "")
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(
+                    parsedContent["media"]["url"].toString(),
+                  ),
+                ),
+              ),
+              height: 100,
             ),
         ],
       ),

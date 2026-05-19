@@ -159,7 +159,7 @@ class CommentsController {
           "${DateTime.now().toIso8601String().replaceAll(" ", "").replaceAll(".", "").replaceAll(":", "")}_${p.basename(file.path).replaceAll(" ", "")}";
 
       final String fullPath = await Supabase.instance.client.storage
-          .from('comments')
+          .from('Comments')
           .upload(
             fileName,
             file,
@@ -167,7 +167,7 @@ class CommentsController {
           );
 
       final String publicUrl = await Supabase.instance.client.storage
-          .from("comments")
+          .from("Comments")
           .getPublicUrl(fileName);
 
       return {
@@ -191,7 +191,7 @@ class CommentsController {
           "${DateTime.now().toIso8601String().replaceAll(" ", "").replaceAll(".", "").replaceAll(":", "")}_${p.basename(file.path).replaceAll(" ", "")}";
 
       final String fullPath = await Supabase.instance.client.storage
-          .from('comments')
+          .from('Comments')
           .upload(
             fileName,
             file,
@@ -199,7 +199,7 @@ class CommentsController {
           );
 
       final String publicUrl = await Supabase.instance.client.storage
-          .from("comments")
+          .from("Comments")
           .getPublicUrl(fileName);
 
       return {
@@ -223,7 +223,7 @@ class CommentsController {
           "${DateTime.now().toIso8601String().replaceAll(" ", "").replaceAll(".", "").replaceAll(":", "")}_${p.basename(file.path).replaceAll(" ", "")}";
 
       final String fullPath = await Supabase.instance.client.storage
-          .from('comments')
+          .from('Comments')
           .upload(
             fileName,
             file,
@@ -231,7 +231,7 @@ class CommentsController {
           );
 
       final String publicUrl = await Supabase.instance.client.storage
-          .from("comments")
+          .from("Comments")
           .getPublicUrl(fileName);
 
       return {
