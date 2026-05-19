@@ -1,13 +1,17 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:go_router/go_router.dart';
+import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/main_development.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../../core/helper/spacing.dart';
 import '../../../../profile/presentation/views/widgets/profile_image_empty.dart';
+import 'package:video_player/video_player.dart';
 
 class CommentWidget extends StatelessWidget {
   CommentWidget({super.key, required this.comment});
@@ -25,11 +29,11 @@ class CommentWidget extends StatelessWidget {
 
     return Container(
       margin: localization.currentLocale.localeIdentifier == "ar"
-          ? EdgeInsets.only(left: (MediaQuery.sizeOf(context).width - 60) * 0.35)
+          ? EdgeInsets.only(left: (MediaQuery.sizeOf(context).width - 60) * 0.5)
           : EdgeInsets.only(
-              right: (MediaQuery.sizeOf(context).width - 60) * 0.35,
+              right: (MediaQuery.sizeOf(context).width - 60) * 0.5,
             ),
-      width: (MediaQuery.sizeOf(context).width - 40) * 0.6,
+      width: (MediaQuery.sizeOf(context).width - 60) * 0.6,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.blueGrey.withOpacity(0.25),
@@ -150,17 +154,58 @@ class CommentWidget extends StatelessWidget {
             ),
           verticalSpace(5),
           if (parsedContent["media"] != "")
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(
-                    parsedContent["media"]["url"].toString(),
+            if (parsedContent["media"]["type"] == "photo")
+              InkWell(
+                onTap: () {
+                  GoRouter.of(context).push(
+                    AppRouter.kPhotoViewerScreen,
+
+                    extra: parsedContent["media"]["url"].toString(),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                        parsedContent["media"]["url"].toString(),
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  width: (MediaQuery.sizeOf(context).width - 60) * 0.6 - 10,
+
+                  height: (MediaQuery.sizeOf(context).width - 60) * 0.6 - 10,
+                ),
+              )
+            else if (parsedContent["media"]["type"] == "video")
+              InkWell(
+                onTap: () {
+                  // GoRouter.of(context).push(
+                  //   AppRouter.kPhotoViewerScreen,
+
+                  //   extra: parsedContent["media"]["url"].toString(),
+                  // );
+                },
+                child: SizedBox(
+                  width: (MediaQuery.sizeOf(context).width - 60) * 0.6 - 10,
+
+                  height: (MediaQuery.sizeOf(context).width - 60) * 0.6 - 10,
+                  child: ClipRRect(
+                    child: FlickVideoPlayer(
+                      flickManager: FlickManager(
+                        autoPlay: false,
+                        videoPlayerController: VideoPlayerController.networkUrl(
+                          Uri.parse(parsedContent["media"]["url"].toString()),
+                          videoPlayerOptions: VideoPlayerOptions(
+                            allowBackgroundPlayback: false,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              height: 100,
-            ),
         ],
       ),
     );

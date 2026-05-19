@@ -81,7 +81,7 @@ class HomeTabViewBody extends StatelessWidget {
           );
 
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 1),
+            padding: const EdgeInsets.symmetric(vertical: 0.1),
             child: PostWidget(post: post),
           );
         }),

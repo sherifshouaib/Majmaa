@@ -123,9 +123,9 @@ class _PostWidgetState extends State<PostWidget> {
 
                   decoration: BoxDecoration(
                     color: Colors.blueGrey.withOpacity(0.25),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(5),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

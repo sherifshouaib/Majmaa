@@ -43,7 +43,7 @@ class PostView extends StatelessWidget {
                     showActions: true,
                     canNavigate: false,
                   ),
-                  verticalSpace(10),
+                  verticalSpace(3),
 
                   // Comments here
                   ...postProvider.comments.map(
@@ -73,7 +73,7 @@ class PostView extends StatelessWidget {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                     ),
-                    color: Colors.blueGrey.withOpacity(0.25),
+                    color: Colors.blueGrey.withOpacity(0.8),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Row(
