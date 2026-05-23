@@ -121,4 +121,14 @@ class TimelineProvider with ChangeNotifier {
 
     toggleLoading();
   }
+
+  void updatePostReactions(int postId, List<Map<String, dynamic>> reactions) {
+    final index = _posts.indexWhere((p) => p["id"] == postId);
+
+    if (index != -1) {
+      _posts[index] = {..._posts[index], "reactions": reactions};
+
+      notifyListeners();
+    }
+  }
 }

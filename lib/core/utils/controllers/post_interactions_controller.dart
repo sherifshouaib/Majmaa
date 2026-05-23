@@ -13,6 +13,30 @@ class PostInteractionsController {
         return {"result": false, "message": "Please login again!"};
       }
 
+      final oldReaction = await Supabase.instance.client
+          .from("post_interactions")
+          .select()
+          .eq("post_id", postId)
+          .eq("user_id", uid)
+          .maybeSingle();
+
+      // لو فيه reaction قديم -> update
+      if (oldReaction != null) {
+        await Supabase.instance.client
+            .from("post_interactions")
+            .update({
+              "react_type": reactType,
+              "date_updated": DateTime.now().toIso8601String(),
+              "updated_by": uid,
+            })
+            .eq("id", oldReaction["id"]);
+        return {"result": true, "message": "Updated successfully ..."};
+      }
+
+
+
+
+
       Map<String, dynamic> data = {
         "user_id": uid,
         "post_id": postId,
@@ -41,17 +65,20 @@ class PostInteractionsController {
 
       await Supabase.instance.client
           .from("post_interactions")
-          .update({
-            "active": false,
-            "date_updated": DateTime.now().toIso8601String(),
-            "updated_by": uid,
-          })
+          .delete()
           .eq("post_id", postId)
           .eq("user_id", uid);
+      // .update({
+      //   "active": false,
+      //   "date_updated": DateTime.now().toIso8601String(),
+      //   "updated_by": uid,
+      // })
+      // .eq("post_id", postId)
+      // .eq("user_id", uid);
 
       return {"result": true, "message": "Removed successfully ..."};
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
       return {"result": false, "message": e.toString()};
     }
   }
@@ -75,9 +102,9 @@ class PostInteractionsController {
           })
           .eq("id", id);
 
-      return {"result": true, "message": "Removed successfully ..."};
+      return {"result": true, "message": "Updated successfully ..."};
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
       return {"result": false, "message": e.toString()};
     }
   }
@@ -103,7 +130,7 @@ class PostInteractionsController {
         "data": res,
       };
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
       return {"result": false, "message": e.toString()};
     }
   }

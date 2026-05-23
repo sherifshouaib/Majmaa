@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sherifshouaib.merhaba"
+    namespace = "com.sherifshouaib.majmaa"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -27,7 +27,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.sherifshouaib.merhaba"
+        applicationId = "com.sherifshouaib.majmaa"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -44,14 +44,14 @@ flavorDimensions += "default"
             resValue(
                 type = "string",
                 name = "app_name",
-                value = "Merhaba Development")
+                value = "Majmaa Development")
         }
         create("production") {
             dimension = "default"
             resValue(
                 type = "string",
                 name = "app_name",
-                value = "Merhaba")
+                value = "Majmaa")
         }
     }
 

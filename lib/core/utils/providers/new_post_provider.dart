@@ -51,6 +51,7 @@ class NewPostProvider with ChangeNotifier {
       });
 
       if (res["result"] == true) {
+        clearNewPostData();
         Fluttertoast.showToast(msg: AppLocale.posted_label.getString(context));
       } else {
         Fluttertoast.showToast(
@@ -158,6 +159,24 @@ class NewPostProvider with ChangeNotifier {
 
   toggleLoading() {
     _isLoading = !_isLoading;
+    notifyListeners();
+  }
+
+  void clearNewPostData() {
+    _textController.clear();
+
+    _media.clear();
+
+    _locationData = {};
+
+    _isOccasionSelected = false;
+
+    _selectedOccasion = "graduation";
+
+    _currentPhotoIndex = 0;
+
+    _currentPostMode = "friends";
+
     notifyListeners();
   }
 }

@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD64QUKejsVe9QaduL6_iQIlfNxmsHERBg',
-    appId: '1:833499283849:web:dd4888aae6053292b32158',
-    messagingSenderId: '833499283849',
-    projectId: 'majmaa-app-95fec',
-    authDomain: 'majmaa-app-95fec.firebaseapp.com',
-    storageBucket: 'majmaa-app-95fec.firebasestorage.app',
-    measurementId: 'G-JEEGF8JZ0D',
+    apiKey: 'AIzaSyAaWWnFqxtitDVTDzoq9Q9ZbBNhMukIzuI',
+    appId: '1:566171578728:web:31f23ecf73536c940ce6dd',
+    messagingSenderId: '566171578728',
+    projectId: 'majmaa-app-dev',
+    authDomain: 'majmaa-app-dev.firebaseapp.com',
+    storageBucket: 'majmaa-app-dev.firebasestorage.app',
+    measurementId: 'G-45G18TG6RJ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCqtD3OyhKFAoNxZSCWqMBjpMsRQh3bO7A',
-    appId: '1:833499283849:android:c07f0f98eaa86e7bb32158',
-    messagingSenderId: '833499283849',
-    projectId: 'majmaa-app-95fec',
-    storageBucket: 'majmaa-app-95fec.firebasestorage.app',
+    apiKey: 'AIzaSyDkr28-VgqF2-hwRvNPT75k5o62vyLFhC4',
+    appId: '1:566171578728:android:701df2d64ae9beb90ce6dd',
+    messagingSenderId: '566171578728',
+    projectId: 'majmaa-app-dev',
+    storageBucket: 'majmaa-app-dev.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAqa6cTYwXy3l2GLs64nuIl4O9cn_JYQtY',
-    appId: '1:833499283849:ios:d973448ca6356193b32158',
-    messagingSenderId: '833499283849',
-    projectId: 'majmaa-app-95fec',
-    storageBucket: 'majmaa-app-95fec.firebasestorage.app',
+    apiKey: 'AIzaSyAP6mhVqempl_haQ2H1vDZwnL5KJOkhhe8',
+    appId: '1:566171578728:ios:88ffff7a3780cb490ce6dd',
+    messagingSenderId: '566171578728',
+    projectId: 'majmaa-app-dev',
+    storageBucket: 'majmaa-app-dev.firebasestorage.app',
     iosBundleId: 'com.sherifshouaib.majmaa',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAqa6cTYwXy3l2GLs64nuIl4O9cn_JYQtY',
-    appId: '1:833499283849:ios:b0f9acea1a14aa8bb32158',
-    messagingSenderId: '833499283849',
-    projectId: 'majmaa-app-95fec',
-    storageBucket: 'majmaa-app-95fec.firebasestorage.app',
+    apiKey: 'AIzaSyAP6mhVqempl_haQ2H1vDZwnL5KJOkhhe8',
+    appId: '1:566171578728:ios:23f87d2c1da93d3d0ce6dd',
+    messagingSenderId: '566171578728',
+    projectId: 'majmaa-app-dev',
+    storageBucket: 'majmaa-app-dev.firebasestorage.app',
     iosBundleId: 'com.example.majmaa',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyD64QUKejsVe9QaduL6_iQIlfNxmsHERBg',
-    appId: '1:833499283849:web:0f097959756c20d2b32158',
-    messagingSenderId: '833499283849',
-    projectId: 'majmaa-app-95fec',
-    authDomain: 'majmaa-app-95fec.firebaseapp.com',
-    storageBucket: 'majmaa-app-95fec.firebasestorage.app',
-    measurementId: 'G-9JVVVVH443',
+    apiKey: 'AIzaSyAaWWnFqxtitDVTDzoq9Q9ZbBNhMukIzuI',
+    appId: '1:566171578728:web:b9cfbc5431c151600ce6dd',
+    messagingSenderId: '566171578728',
+    projectId: 'majmaa-app-dev',
+    authDomain: 'majmaa-app-dev.firebaseapp.com',
+    storageBucket: 'majmaa-app-dev.firebasestorage.app',
+    measurementId: 'G-5LK88CQGKC',
   );
 }

@@ -5,3 +5,4 @@ class AssetsUtils {
   static String appIconLight = "assets/images/MAJMAALogoLight.png";
   static String profileAvatar = "assets/images/profile_avatar.png";
 }
+

@@ -59,6 +59,11 @@ class _PostWidgetState extends State<PostWidget> {
       );
 
       if (res["result"] == true) {
+        reactions = [];
+        myReaction = {};
+        isReacted = false;
+        selectedReaction = "like";
+
         setState(() {
           reactions = (res["data"] as List)
               .map((d) => Map<String, dynamic>.from(d as Map))
@@ -98,6 +103,16 @@ class _PostWidgetState extends State<PostWidget> {
     await getPostInteractions();
 
     await getCommentsCount();
+  }
+
+  @override
+  void didUpdateWidget(covariant PostWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.post["id"] != widget.post["id"] ||
+        oldWidget.post["reactions"] != widget.post["reactions"]) {
+      getPostInteractions();
+    }
   }
 
   @override
@@ -479,6 +494,11 @@ class _PostWidgetState extends State<PostWidget> {
                                       widget.post["id"],
                                       reaction.value!,
                                     );
+                                    await getPostInteractions();
+                                    timeLineProvider.updatePostReactions(
+                                      widget.post["id"],
+                                      reactions,
+                                    );
                                   } else {
                                     setState(() {
                                       selectedReaction = reaction.value!;
@@ -488,6 +508,11 @@ class _PostWidgetState extends State<PostWidget> {
                                     await PostInteractionsController.updateReactionToPost(
                                       myReaction["id"],
                                       reaction.value!,
+                                    );
+                                    await getPostInteractions();
+                                    timeLineProvider.updatePostReactions(
+                                      widget.post["id"],
+                                      reactions,
                                     );
                                   }
                                 },
@@ -527,12 +552,16 @@ class _PostWidgetState extends State<PostWidget> {
                                       await PostInteractionsController.removeReactionToPost(
                                         widget.post["id"],
                                       );
-
-                                      setState(() {
-                                        isReacted = false;
-                                        myReaction = {};
-                                        selectedReaction = "like";
-                                      });
+                                      await getPostInteractions();
+                                      timeLineProvider.updatePostReactions(
+                                        widget.post["id"],
+                                        reactions,
+                                      );
+                                      // setState(() {
+                                      //   isReacted = false;
+                                      //   myReaction = {};
+                                      //   selectedReaction = "like";
+                                      // });
                                     } catch (e) {
                                       debugPrint(e.toString());
                                     }
