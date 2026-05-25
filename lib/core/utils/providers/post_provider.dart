@@ -5,6 +5,8 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/utils/controllers/comments_controller.dart';
+import 'package:merhaba/core/utils/providers/timeline_provider.dart';
+import 'package:provider/provider.dart';
 
 class PostProvider with ChangeNotifier {
   bool _isLoading = false;
@@ -87,7 +89,9 @@ class PostProvider with ChangeNotifier {
           msg: AppLocale.posted_successfully_label.getString(context),
         );
 
-        getComments();
+        await getComments();
+
+        refreshCommentsCountMethod(context);
 
         // TODO: send notification to post owner for the comment
       } else {
@@ -96,8 +100,27 @@ class PostProvider with ChangeNotifier {
         );
       }
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
     }
+  }
+
+  void refreshCommentsCountMethod(BuildContext context) {
+    final timelineProvider = Provider.of<TimelineProvider>(
+      context,
+      listen: false,
+    );
+
+    timelineProvider.updatePostCommentsCount(
+      _currentPost["id"],
+      (_currentPost["commentsCount"] ?? 0) + 1,
+    );
+
+    _currentPost = {
+      ..._currentPost,
+      "commentsCount": (_currentPost["commentsCount"] ?? 0) + 1,
+    };
+
+    notifyListeners();
   }
 
   Future<void> onAddPhoto(BuildContext context) async {
@@ -122,8 +145,9 @@ class PostProvider with ChangeNotifier {
           msg: AppLocale.posted_successfully_label.getString(context),
         );
 
-        getComments();
+        await getComments();
 
+        refreshCommentsCountMethod(context);
         // TODO: send notification to post owner for the comment
       } else {
         Fluttertoast.showToast(
@@ -131,7 +155,7 @@ class PostProvider with ChangeNotifier {
         );
       }
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -157,7 +181,8 @@ class PostProvider with ChangeNotifier {
           msg: AppLocale.posted_successfully_label.getString(context),
         );
 
-        getComments();
+        await getComments();
+        refreshCommentsCountMethod(context);
 
         // TODO: send notification to post owner for the comment
       } else {
@@ -166,7 +191,7 @@ class PostProvider with ChangeNotifier {
         );
       }
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -176,7 +201,7 @@ class PostProvider with ChangeNotifier {
 
       setComments(res);
     } catch (e) {
-            debugPrint(e.toString());
+      debugPrint(e.toString());
     }
   }
 

@@ -36,7 +36,9 @@ class CommentWidget extends StatelessWidget {
       width: (MediaQuery.sizeOf(context).width - 60) * 0.6,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.blueGrey.withOpacity(0.25),
+        color: Colors.blueGrey.withValues(alpha: 0.25),
+
+        //.withOpacity(0.25),
       ),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(

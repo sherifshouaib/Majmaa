@@ -156,7 +156,9 @@ class _PostWidgetState extends State<PostWidget> {
                   width: MediaQuery.sizeOf(context).width - 28,
 
                   decoration: BoxDecoration(
-                    color: Colors.blueGrey.withOpacity(0.25),
+                    color: Colors.blueGrey.withValues(alpha: 0.25),
+
+                    //  .withOpacity(0.25),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   padding: EdgeInsets.all(5),
@@ -392,7 +394,11 @@ class _PostWidgetState extends State<PostWidget> {
                                     padding: const EdgeInsets.all(10),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.8),
+                                        color: Colors.black.withValues(
+                                          alpha: 0.8,
+                                        ),
+
+                                        //   .withOpacity(0.8),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       padding: EdgeInsets.all(5),
@@ -465,7 +471,8 @@ class _PostWidgetState extends State<PostWidget> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 color: isReacted
-                                    ? Colors.blueGrey.withOpacity(0.5)
+                                    ? Colors.blueGrey.withValues(alpha: 0.5)
+                                    //   .withOpacity(0.5)
                                     : Colors.transparent,
                               ),
                               child: ReactionButton<String>(
@@ -660,40 +667,6 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                           ],
                         ),
-
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: (widget.post["parsedContent"]["media"] as List)
-                      //       .asMap()
-                      //       .entries
-                      //       .map((entry) {
-                      //         return GestureDetector(
-                      //           onTap: () => _controller.animateToPage(entry.key),
-                      //           child: Container(
-                      //             width: 12.0,
-                      //             height: 12.0,
-                      //             margin: EdgeInsets.symmetric(
-                      //               vertical: 8.0,
-                      //               horizontal: 4.0,
-                      //             ),
-                      //             decoration: BoxDecoration(
-                      //               shape: BoxShape.circle,
-                      //               color:
-                      //                   (Theme.of(context).brightness ==
-                      //                               Brightness.dark
-                      //                           ? Colors.white
-                      //                           : Colors.black)
-                      //                       .withValues(
-                      //                         alpha: currentIndex == entry.key
-                      //                             ? 0.9
-                      //                             : 0.4,
-                      //                       ),
-                      //             ),
-                      //           ),
-                      //         );
-                      //       })
-                      //       .toList(),
-                      // ),
                     ],
                   ),
                 ),

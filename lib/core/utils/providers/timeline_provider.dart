@@ -131,4 +131,14 @@ class TimelineProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void updatePostCommentsCount(int postId, int commentsCount) {
+    final index = _posts.indexWhere((p) => p["id"] == postId);
+
+    if (index != -1) {
+      _posts[index] = {..._posts[index], "commentsCount": commentsCount};
+
+      notifyListeners();
+    }
+  }
 }

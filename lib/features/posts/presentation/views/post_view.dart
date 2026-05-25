@@ -73,7 +73,9 @@ class PostView extends StatelessWidget {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                     ),
-                    color: Colors.blueGrey.withOpacity(0.8),
+                    color: Colors.blueGrey.withValues(alpha: 0.8),
+
+                    //  .withOpacity(0.8),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Row(

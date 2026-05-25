@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:merhaba/core/widgets/photo_viewer_screen.dart';
-import 'package:merhaba/features/home/presentation/views/location_viewer_view.dart';
-import 'package:merhaba/features/home/presentation/views/new_post_view.dart';
+import 'package:merhaba/features/new_post/presentation/views/location_viewer_view.dart';
+import 'package:merhaba/features/new_post/presentation/views/new_post_view.dart';
 import 'package:merhaba/features/login/presentation/manager/views/forget_password_view.dart';
 import 'package:merhaba/features/login/presentation/manager/views/update_password_view.dart';
 import 'package:merhaba/features/posts/presentation/views/post_view.dart';

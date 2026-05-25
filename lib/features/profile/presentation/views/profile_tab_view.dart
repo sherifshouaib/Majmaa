@@ -105,37 +105,8 @@ class ProfileTabView extends StatelessWidget {
                                   .eq("user_id", userId);
                             } catch (e) {
                               debugPrint(e.toString());
-
-                              // String originalFilename = path.basename(
-                              //   file.path,
-                              // );
-                              // String extension = path.extension(file.path);
-                              // String fileName =
-                              //     "${DateTime.now().toIso8601String().replaceAll('.', '').replaceAll(' ', '')}_$originalFilename";
-                              // //  debugPrint(fileName);
-
-                              // final String fullPath = await Supabase
-                              //     .instance
-                              //     .client
-                              //     .storage
-                              //     .from('Users')
-                              //     .upload(fileName, File(file.path));
-
-                              // final String url = await Supabase
-                              //     .instance
-                              //     .client
-                              //     .storage
-                              //     .from("Users")
-                              //     .getPublicUrl(fileName);
-                              // await profileTabProvider.updateUserProfilePicture(
-                              //   url,
-                              // );
-                              // Navigator.of(context).pop();
                             }
 
-                            // catch (e) {
-                            //   debugPrint(e.toString());
-                            // }
                             profileTabProvider.toggleLoading();
                           }
                         },
