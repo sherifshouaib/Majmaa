@@ -25,7 +25,7 @@ class TimelineProvider with ChangeNotifier {
     return [
       {
         "value": "like",
-        "text": AppLocale.like_label.getString(context),
+        "text": AppLocale.likeLabel.getString(context),
         "icon": Image.asset(
           "assets/images/like_emoji.png",
           fit: BoxFit.contain,
@@ -35,7 +35,7 @@ class TimelineProvider with ChangeNotifier {
       },
       {
         "value": "love",
-        "text": AppLocale.love_label.getString(context),
+        "text": AppLocale.loveLabel.getString(context),
         "icon": Image.asset(
           "assets/images/love_emoji.png",
           fit: BoxFit.contain,
@@ -45,7 +45,7 @@ class TimelineProvider with ChangeNotifier {
       },
       {
         "value": "wow",
-        "text": AppLocale.wow_label.getString(context),
+        "text": AppLocale.wowLabel.getString(context),
         "icon": Image.asset(
           "assets/images/wow_emoji.png",
           fit: BoxFit.contain,
@@ -55,7 +55,7 @@ class TimelineProvider with ChangeNotifier {
       },
       {
         "value": "haha",
-        "text": AppLocale.haha_label.getString(context),
+        "text": AppLocale.hahaLabel.getString(context),
         "icon": Image.asset(
           "assets/images/haha_emoji.png",
           fit: BoxFit.contain,
@@ -65,7 +65,7 @@ class TimelineProvider with ChangeNotifier {
       },
       {
         "value": "sad",
-        "text": AppLocale.sad_label.getString(context),
+        "text": AppLocale.sadLabel.getString(context),
         "icon": Image.asset(
           "assets/images/sad_emoji.png",
           fit: BoxFit.contain,
@@ -75,7 +75,7 @@ class TimelineProvider with ChangeNotifier {
       },
       {
         "value": "angry",
-        "text": AppLocale.angry_label.getString(context),
+        "text": AppLocale.angryLabel.getString(context),
         "icon": Image.asset(
           "assets/images/angry_emoji.png",
           fit: BoxFit.contain,
@@ -93,7 +93,7 @@ class TimelineProvider with ChangeNotifier {
     _swipeController.sink.add(SwipeRefreshState.hidden);
   }
 
-  toggleLoading() {
+  void toggleLoading() {
     _isLoading = !_isLoading;
     notifyListeners();
   }

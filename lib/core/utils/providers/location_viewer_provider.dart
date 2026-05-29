@@ -17,7 +17,7 @@ class LocationViewerProvider with ChangeNotifier {
   GeoPoint _currentLocation = GeoPoint(latitude: 0, longitude: 0);
   GeoPoint get currentLocation => _currentLocation;
 
-  setCurrentLocation() async {
+  Future<void> setCurrentLocation() async {
     try {
       _currentLocation = await _mapcontroller.myLocation();
       notifyListeners();
@@ -26,7 +26,7 @@ class LocationViewerProvider with ChangeNotifier {
     }
   }
 
-  toggleLoading() {
+  void toggleLoading() {
     _isLoading = !_isLoading;
     notifyListeners();
   }

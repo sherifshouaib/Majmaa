@@ -60,7 +60,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
           TextField(
             controller: emailController,
             decoration: InputDecoration(
-              hintText: AppLocale.enter_your_email_label.getString(context),
+              hintText: AppLocale.enterYourEmailLabel.getString(context),
             ),
           ),
 
@@ -70,14 +70,14 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
             onPressed: isLoading ? null : sendResetEmail,
             child: isLoading
                 ? const CircularProgressIndicator()
-                : Text(AppLocale.send_reset_email_label.getString(context)),
+                : Text(AppLocale.sendResetEmailLabel.getString(context)),
           ),
 
           const SizedBox(height: 10),
 
           TextButton(
             onPressed: canResend ? resendEmail : null,
-            child: Text(AppLocale.resend_email_label.getString(context)),
+            child: Text(AppLocale.resendEmailLabel.getString(context)),
           ),
         ],
       ),

@@ -148,8 +148,8 @@ class _MerhabaState extends State<Merhaba> {
 
     localization.init(
       mapLocales: [
-        const MapLocale('en', AppLocale.EN),
-        const MapLocale('ar', AppLocale.AR),
+        const MapLocale('en', AppLocale.en),
+        const MapLocale('ar', AppLocale.ar),
       ],
       initLanguageCode: 'en',
     );

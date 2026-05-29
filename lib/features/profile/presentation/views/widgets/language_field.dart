@@ -10,7 +10,7 @@ class LanguageField extends StatelessWidget {
     return SizedBox(
       width: (MediaQuery.sizeOf(context).width - 60) * 0.45,
       child: Text(
-        AppLocale.language_label.getString(context),
+        AppLocale.languageLabel.getString(context),
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
 
         overflow: TextOverflow.ellipsis,

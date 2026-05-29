@@ -11,12 +11,12 @@ class AppSettingsProvider with ChangeNotifier {
   bool _isDark = false;
   bool get isDark => _isDark;
 
-  setIsDark(bool value) {
+  void setIsDark(bool value) {
     _isDark = value;
     notifyListeners();
   }
 
-  getCurrentLanguage() {
+  void getCurrentLanguage() {
     if (localization.currentLocale!.localeIdentifier == "en") {
       _currentLanguage = "English";
     } else if (localization.currentLocale!.localeIdentifier == "ar") {
@@ -25,7 +25,7 @@ class AppSettingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  updateCurrentLanguage(String value) {
+  void updateCurrentLanguage(String value) {
     if (value == "English") {
       localization.translate('en');
     } else if (value == "العربية") {
@@ -36,7 +36,7 @@ class AppSettingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  updateDarkMode(bool value, BuildContext context) {
+  void updateDarkMode(bool value, BuildContext context) {
     _isDark = value;
 
     if (_isDark) {

@@ -55,10 +55,10 @@ class PostResourcesBody extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
 
-                    child: Text(AppLocale.camera_label.getString(context)),
+                    child: Text(AppLocale.cameraLabel.getString(context)),
                   ),
                   FilledButton(
-                    child: Text(AppLocale.gallery_label.getString(context)),
+                    child: Text(AppLocale.galleryLabel.getString(context)),
                     onPressed: () async {
                       ImagePicker imagePicker = ImagePicker();
                       var files = await imagePicker.pickMultiImage(
@@ -81,7 +81,7 @@ class PostResourcesBody extends StatelessWidget {
           },
 
           title: Text(
-            AppLocale.photo_label.getString(context),
+            AppLocale.photoLabel.getString(context),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),
@@ -118,10 +118,10 @@ class PostResourcesBody extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
 
-                    child: Text(AppLocale.camera_label.getString(context)),
+                    child: Text(AppLocale.cameraLabel.getString(context)),
                   ),
                   FilledButton(
-                    child: Text(AppLocale.gallery_label.getString(context)),
+                    child: Text(AppLocale.galleryLabel.getString(context)),
                     onPressed: () async {
                       ImagePicker imagePicker = ImagePicker();
                       var file = await imagePicker.pickVideo(
@@ -147,7 +147,7 @@ class PostResourcesBody extends StatelessWidget {
             );
           },
           title: Text(
-            AppLocale.video_label.getString(context),
+            AppLocale.videoLabel.getString(context),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),

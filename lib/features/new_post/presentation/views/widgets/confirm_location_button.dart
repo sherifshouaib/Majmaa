@@ -20,7 +20,7 @@ class ConfirmLocationsButton extends StatelessWidget {
         await locationViewerProvider.setCurrentLocation();
         GoRouter.of(context).pop(locationViewerProvider.currentLocation);
       },
-      child: Text(AppLocale.confirm_location_label.getString(context)),
+      child: Text(AppLocale.confirmLocationLabel.getString(context)),
     );
   }
 }

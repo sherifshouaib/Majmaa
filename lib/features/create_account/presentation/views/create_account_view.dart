@@ -60,17 +60,17 @@ class _CreateAccountViewState extends State<CreateAccountView> {
 
                   CustomInfoLabel(
                     funcController: emailController,
-                    label: AppLocale.enter_your_email_label.getString(context),
-                    placeholder: AppLocale.email_label.getString(context),
+                    label: AppLocale.enterYourEmailLabel.getString(context),
+                    placeholder: AppLocale.emailLabel.getString(context),
                   ),
 
                   verticalSpace(15),
                   CustomInfoLabel(
                     funcController: fullNameController,
-                    label: AppLocale.enter_your_fullname_label.getString(
+                    label: AppLocale.enterYourFullnameLabel.getString(
                       context,
                     ),
-                    placeholder: AppLocale.enter_your_fullname_label.getString(
+                    placeholder: AppLocale.enterYourFullnameLabel.getString(
                       context,
                     ),
                   ),
@@ -78,8 +78,8 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   verticalSpace(15),
                   CustomInfoLabel(
                     funcController: phoneController,
-                    label: AppLocale.enter_your_phone_label.getString(context),
-                    placeholder: AppLocale.enter_your_phone_label.getString(
+                    label: AppLocale.enterYourPhoneLabel.getString(context),
+                    placeholder: AppLocale.enterYourPhoneLabel.getString(
                       context,
                     ),
                     textInputType: TextInputType.phone,
@@ -88,10 +88,10 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   verticalSpace(15),
                   CustomInfoLabel(
                     funcController: passController,
-                    label: AppLocale.enter_your_password_label.getString(
+                    label: AppLocale.enterYourPasswordLabel.getString(
                       context,
                     ),
-                    placeholder: AppLocale.enter_your_password_label.getString(
+                    placeholder: AppLocale.enterYourPasswordLabel.getString(
                       context,
                     ),
                     obsecure: true,
@@ -100,10 +100,10 @@ class _CreateAccountViewState extends State<CreateAccountView> {
                   verticalSpace(20),
                   CustomInfoLabel(
                     funcController: confirmPassController,
-                    label: AppLocale.confirm_your_password_label.getString(
+                    label: AppLocale.confirmYourPasswordLabel.getString(
                       context,
                     ),
-                    placeholder: AppLocale.confirm_your_password_label
+                    placeholder: AppLocale.confirmYourPasswordLabel
                         .getString(context),
                     obsecure: true,
                   ),
@@ -165,7 +165,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
 
                       createAccountProvider.toggleLoading();
                     },
-                    textButton: AppLocale.signup_label.getString(context),
+                    textButton: AppLocale.signupLabel.getString(context),
                   ),
                 ],
               ),

@@ -30,42 +30,42 @@ class PostProvider with ChangeNotifier {
   String _addMediaUrl = "";
   String get addMediaUrl => _addMediaUrl;
 
-  setAddMediaUrl(String value) {
+  void setAddMediaUrl(String value) {
     _addMediaUrl = value;
     notifyListeners();
   }
 
-  setComments(List<Map<String, dynamic>> value) {
+  void setComments(List<Map<String, dynamic>> value) {
     _comments = value;
     notifyListeners();
   }
 
-  addToComments(Map<String, dynamic> value) {
+  void addToComments(Map<String, dynamic> value) {
     _comments.add(value);
     notifyListeners();
   }
 
-  clearComments() {
+  void clearComments() {
     _comments.clear();
     notifyListeners();
   }
 
-  setIsNewCommentEmpty(bool value) {
+  void setIsNewCommentEmpty(bool value) {
     _isNewCommentEmpty = value;
     notifyListeners();
   }
 
-  setCurrentPost(Map<String, dynamic> value) {
+  void setCurrentPost(Map<String, dynamic> value) {
     _currentPost = value;
     notifyListeners();
   }
 
-  setIsLoading(bool value) {
+  void setIsLoading(bool value) {
     _isLoading = value;
     notifyListeners();
   }
 
-  toggleLoading() {
+  void toggleLoading() {
     _isLoading = !_isLoading;
     notifyListeners();
   }
@@ -86,7 +86,7 @@ class PostProvider with ChangeNotifier {
       });
       if (res["result"] == true) {
         Fluttertoast.showToast(
-          msg: AppLocale.posted_successfully_label.getString(context),
+          msg: AppLocale.commentedSuccessfullyLabel.getString(context),
         );
 
         await getComments();
@@ -96,7 +96,7 @@ class PostProvider with ChangeNotifier {
         // TODO: send notification to post owner for the comment
       } else {
         Fluttertoast.showToast(
-          msg: AppLocale.something_went_wrong_label.getString(context),
+          msg: AppLocale.somethingWentWrongLabel.getString(context),
         );
       }
     } catch (e) {
@@ -142,7 +142,7 @@ class PostProvider with ChangeNotifier {
       });
       if (res["result"] == true) {
         Fluttertoast.showToast(
-          msg: AppLocale.posted_successfully_label.getString(context),
+          msg: AppLocale.commentedSuccessfullyLabel.getString(context),
         );
 
         await getComments();
@@ -151,7 +151,7 @@ class PostProvider with ChangeNotifier {
         // TODO: send notification to post owner for the comment
       } else {
         Fluttertoast.showToast(
-          msg: AppLocale.something_went_wrong_label.getString(context),
+          msg: AppLocale.somethingWentWrongLabel.getString(context),
         );
       }
     } catch (e) {
@@ -178,7 +178,7 @@ class PostProvider with ChangeNotifier {
       });
       if (res["result"] == true) {
         Fluttertoast.showToast(
-          msg: AppLocale.posted_successfully_label.getString(context),
+          msg: AppLocale.commentedSuccessfullyLabel.getString(context),
         );
 
         await getComments();
@@ -187,7 +187,7 @@ class PostProvider with ChangeNotifier {
         // TODO: send notification to post owner for the comment
       } else {
         Fluttertoast.showToast(
-          msg: AppLocale.something_went_wrong_label.getString(context),
+          msg: AppLocale.somethingWentWrongLabel.getString(context),
         );
       }
     } catch (e) {

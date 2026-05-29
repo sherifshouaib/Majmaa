@@ -12,7 +12,7 @@ class NavigationText extends StatelessWidget {
     return SizedBox(
       width: (MediaQuery.sizeOf(context).width - 60) * 0.6,
       child: Text(
-        AppLocale.whats_on_your_mind_label.getString(context),
+        AppLocale.whatsOnYourMindLabel.getString(context),
         style: TextStyle(
           fontWeight: FontWeight.bold,
           //  fontStyle: FontStyle.italic,

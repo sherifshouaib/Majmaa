@@ -52,28 +52,28 @@ class NewPostProvider with ChangeNotifier {
 
       if (res["result"] == true) {
         clearNewPostData();
-        Fluttertoast.showToast(msg: AppLocale.posted_label.getString(context));
+        Fluttertoast.showToast(msg: AppLocale.postedLabel.getString(context));
       } else {
         Fluttertoast.showToast(
-          msg: AppLocale.something_went_wrong_label.getString(context),
+          msg: AppLocale.somethingWentWrongLabel.getString(context),
         );
       }
       GoRouter.of(context).pop();
     } catch (e) {
       debugPrint(e.toString());
       Fluttertoast.showToast(
-        msg: AppLocale.something_went_wrong_label.getString(context),
+        msg: AppLocale.somethingWentWrongLabel.getString(context),
       );
     }
     toggleLoading();
   }
 
-  setIsOccasionSelected(bool value) {
+  void setIsOccasionSelected(bool value) {
     _isOccasionSelected = value;
     notifyListeners();
   }
 
-  setSelectedOccasion(String value) {
+  void setSelectedOccasion(String value) {
     toggleLoading();
     try {
       _selectedOccasion = value;
@@ -84,80 +84,80 @@ class NewPostProvider with ChangeNotifier {
     toggleLoading();
   }
 
-  setLocationData(Map<String, dynamic> value) {
+  void setLocationData(Map<String, dynamic> value) {
     _locationData = value;
 
     notifyListeners();
   }
 
-  setCurrentPhotoIndex(int value) {
+  void setCurrentPhotoIndex(int value) {
     _currentPhotoIndex = value;
     notifyListeners();
   }
 
-  addNewMedia(Map<String, dynamic> data) {
+  void addNewMedia(Map<String, dynamic> data) {
     _media.add(data);
     notifyListeners();
   }
 
-  addNewMedias(List<Map<String, dynamic>> data) {
+  void addNewMedias(List<Map<String, dynamic>> data) {
     _media.addAll(data);
     notifyListeners();
   }
 
-  clearMedia() {
+  void clearMedia() {
     _media.clear();
     notifyListeners();
   }
 
-  setCurrentPostMode(String value) {
+  void setCurrentPostMode(String value) {
     _currentPostMode = value;
     notifyListeners();
   }
 
-  getVisibilityOptions(BuildContext context) {
+  List<Map<String, dynamic>> getVisibilityOptions(BuildContext context) {
     final List<Map<String, dynamic>> list = [
       {
         'value': 'public',
-        'label': AppLocale.public_label.getString(context),
+        'label': AppLocale.publicLabel.getString(context),
         "icon": Icon(Icons.public),
       },
       {
         'value': 'friends',
-        'label': AppLocale.friends_label.getString(context),
+        'label': AppLocale.friendsLabel.getString(context),
         "icon": Icon(Icons.group),
       },
       {
         'value': 'only_me',
-        'label': AppLocale.only_me_label.getString(context),
+        'label': AppLocale.onlyMeLabel.getString(context),
         "icon": Icon(Icons.remove_red_eye),
       },
     ];
     return list;
   }
 
-  getOccasionsOptions(BuildContext context) {
+  List<Map<String, dynamic>> getOccasionsOptions(BuildContext context) {
     final List<Map<String, dynamic>> list = [
       {
         'value': 'graduation',
-        'label': AppLocale.graduation_label.getString(context),
+        'label': AppLocale.graduationLabel.getString(context),
         "icon": Icon(Icons.account_balance),
       },
       {
         'value': 'engagement',
-        'label': AppLocale.engagement_label.getString(context),
+        'label': AppLocale.engagementLabel.getString(context),
         "icon": Icon(Icons.circle_outlined),
       },
       {
         'value': 'marriage',
-        'label': AppLocale.marriage_label.getString(context),
+        'label': AppLocale.marriageLabel.getString(context),
         "icon": Icon(Icons.female),
       },
     ];
     return list;
   }
 
-  toggleLoading() {
+  void toggleLoading() {
     _isLoading = !_isLoading;
     notifyListeners();
   }
@@ -176,6 +176,42 @@ class NewPostProvider with ChangeNotifier {
     _currentPhotoIndex = 0;
 
     _currentPostMode = "friends";
+
+    notifyListeners();
+  }
+
+  Future<void> removeMedia(int index) async {
+    try {
+      final mediaItem = _media[index];
+
+      if (mediaItem["fileName"] != null) {
+        await PostsController.deletePostMedia(mediaItem["fileName"]);
+      }
+
+      _media.removeAt(index);
+
+      if (_currentPhotoIndex >= _media.length && _media.isNotEmpty) {
+        _currentPhotoIndex = _media.length - 1;
+      }
+
+      if (_media.isEmpty) {
+        _currentPhotoIndex = 0;
+      }
+
+      notifyListeners();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  void removeLocation() {
+    _locationData = {};
+    notifyListeners();
+  }
+
+  void removeOccasion() {
+    _isOccasionSelected = false;
+    _selectedOccasion = "graduation";
 
     notifyListeners();
   }

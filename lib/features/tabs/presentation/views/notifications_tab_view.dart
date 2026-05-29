@@ -10,7 +10,7 @@ class NotificationsTabView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(AppLocale.notifications_label.getString(context)),
+        title: Text(AppLocale.notificationsLabel.getString(context)),
       ),
     );
   }

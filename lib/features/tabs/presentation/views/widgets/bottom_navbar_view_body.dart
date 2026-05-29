@@ -57,7 +57,7 @@ class BottomNavBarViewBody extends StatelessWidget {
       items: [
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.home),
-          title: (AppLocale.home_label.getString(context)),
+          title: (AppLocale.homeLabel.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -65,7 +65,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.group),
-          title: (AppLocale.friends_label.getString(context)),
+          title: (AppLocale.friendsLabel.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -73,7 +73,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.video_camera_solid),
-          title: (AppLocale.videos_label.getString(context)),
+          title: (AppLocale.videosLabel.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -81,7 +81,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.notifications),
-          title: (AppLocale.notifications_label.getString(context)),
+          title: (AppLocale.notificationsLabel.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey
@@ -89,7 +89,7 @@ class BottomNavBarViewBody extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.account_circle_sharp),
-          title: (AppLocale.profile_label.getString(context)),
+          title: (AppLocale.profileLabel.getString(context)),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: Globals.theme == "Dark"
               ? CupertinoColors.systemGrey

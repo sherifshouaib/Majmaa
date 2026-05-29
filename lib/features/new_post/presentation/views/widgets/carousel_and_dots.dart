@@ -24,27 +24,80 @@ class _CarouselAndDotsState extends State<CarouselAndDots> {
     return Column(
       children: [
         CarouselSlider(
-          items: newPostProvider.media
-              .map(
-                (item) => item["type"] == "photo"
-                    ? CachedNetworkImage(
-                        imageUrl: item["url"].toString(),
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
+          // items: newPostProvider.media
+          //     .map(
+          //       (item) => item["type"] == "photo"
+          //           ? CachedNetworkImage(
+          //               imageUrl: item["url"].toString(),
+          //               imageBuilder: (context, imageProvider) => Container(
+          //                 decoration: BoxDecoration(
+          //                   image: DecorationImage(
+          //                     image: imageProvider,
+          //                     fit: BoxFit.cover,
+          //                   ),
+          //                 ),
+          //               ),
+          //               placeholder: (context, url) =>
+          //                   Center(child: CircularProgressIndicator()),
+          //               errorWidget: (context, url, error) =>
+          //                   Center(child: Icon(Icons.error)),
+          //             )
+          //           : VideoPostItem(videoUrl: item["url"].toString()),
+          //     )
+          //     .toList(),
+          items: newPostProvider.media.asMap().entries.map((entry) {
+            final index = entry.key;
+            final item = entry.value;
+
+            return Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: item["type"] == "photo"
+                      ? CachedNetworkImage(
+                          imageUrl: item["url"].toString(),
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        placeholder: (context, url) =>
-                            Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            Center(child: Icon(Icons.error)),
-                      )
-                    : VideoPostItem(videoUrl: item["url"].toString()),
-              )
-              .toList(),
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Center(child: Icon(Icons.error)),
+                        )
+                      : VideoPostItem(videoUrl: item["url"].toString()),
+                ),
+
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: GestureDetector(
+                    onTap: () async {
+                      await newPostProvider.removeMedia(index);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.6),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }).toList(),
+
+          
           carouselController: _controller,
           options: CarouselOptions(
             autoPlay: false,

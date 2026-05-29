@@ -3,7 +3,7 @@ import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
 import 'package:merhaba/features/profile/presentation/views/widgets/sizedbox_body.dart';
 
 class RowProfileData extends StatelessWidget {
-  RowProfileData({
+  const RowProfileData({
     super.key,
     required this.profileTabProvider,
     required this.text,
@@ -13,8 +13,8 @@ class RowProfileData extends StatelessWidget {
 
   final ProfileTabProvider profileTabProvider;
   final String text;
-  Color? color;
-  double? fontsize;
+  final Color? color;
+  final double? fontsize;
   @override
   Widget build(BuildContext context) {
     return Row(

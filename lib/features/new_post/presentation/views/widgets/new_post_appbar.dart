@@ -26,10 +26,10 @@ class NewPostAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {
             newPostProvider.onAdd(context);
           },
-          child: Text(AppLocale.save_label.getString(context)),
+          child: Text(AppLocale.saveLabel.getString(context)),
         ),
       ],
-      title: Text(AppLocale.new_post_label.getString(context)),
+      title: Text(AppLocale.newPostLabel.getString(context)),
     );
   }
 }

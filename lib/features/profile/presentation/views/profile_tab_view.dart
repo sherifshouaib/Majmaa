@@ -17,7 +17,6 @@ import 'package:merhaba/features/profile/presentation/views/widgets/profile_opti
 import 'package:merhaba/features/profile/presentation/views/widgets/row_profile_data.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:path/path.dart' as path;
 
 class ProfileTabView extends StatelessWidget {
   const ProfileTabView({super.key});
@@ -30,7 +29,7 @@ class ProfileTabView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(AppLocale.profile_label.getString(context)),
+          title: Text(AppLocale.profileLabel.getString(context)),
         ),
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -110,10 +109,10 @@ class ProfileTabView extends StatelessWidget {
                             profileTabProvider.toggleLoading();
                           }
                         },
-                        child: Text(AppLocale.camera_label.getString(context)),
+                        child: Text(AppLocale.cameraLabel.getString(context)),
                       ),
                       FilledButton(
-                        child: Text(AppLocale.gallery_label.getString(context)),
+                        child: Text(AppLocale.galleryLabel.getString(context)),
                         onPressed: () async {
                           ImagePicker imagePicker = ImagePicker();
                           var file = await imagePicker.pickImage(
@@ -204,18 +203,18 @@ class ProfileTabView extends StatelessWidget {
             Divider(),
             verticalSpace(10),
             ProfileOptionsInkWell(
-              text: AppLocale.account_settings_label.getString(context),
+              text: AppLocale.accountSettingsLabel.getString(context),
               ontap: () {},
             ),
             verticalSpace(5),
             ProfileOptionsInkWell(
-              text: AppLocale.app_settings_label.getString(context),
+              text: AppLocale.appSettingsLabel.getString(context),
               ontap: () async {
                 final appSettingsProvider = Provider.of<AppSettingsProvider>(
                   context,
                   listen: false,
                 );
-                await appSettingsProvider.getCurrentLanguage();
+                 appSettingsProvider.getCurrentLanguage();
                 appSettingsProvider.setIsDark(Globals.theme == "Dark");
                 GoRouter.of(context).push(AppRouter.kAppSettingsView);
               },
@@ -223,13 +222,13 @@ class ProfileTabView extends StatelessWidget {
 
             verticalSpace(5),
             ProfileOptionsInkWell(
-              text: AppLocale.preferences_label.getString(context),
+              text: AppLocale.preferencesLabel.getString(context),
               ontap: () {},
             ),
 
             verticalSpace(5),
             ProfileOptionsInkWell(
-              text: AppLocale.privacy_label.getString(context),
+              text: AppLocale.privacyLabel.getString(context),
               ontap: () {},
             ),
 
@@ -237,7 +236,7 @@ class ProfileTabView extends StatelessWidget {
             Divider(),
             verticalSpace(10),
             ProfileOptionsInkWell(
-              text: AppLocale.logout_label.getString(context),
+              text: AppLocale.logoutLabel.getString(context),
               color: const Color.fromARGB(128, 255, 0, 0),
               ontap: () async {
                 try {

@@ -34,23 +34,58 @@ class LocationOccasionShow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        ElevatedButton.icon(
+        // ElevatedButton.icon(
+        //   onPressed: () {},
+        //   label: Text(
+        //     newPostProvider
+        //         .getOccasionsOptions(context)
+        //         .firstWhere(
+        //           (element) =>
+        //               element["value"] == newPostProvider.selectedOccasion,
+        //         )["label"]
+        //         .toString(),
+        //   ),
+        //   icon: newPostProvider
+        //       .getOccasionsOptions(context)
+        //       .firstWhere(
+        //         (element) =>
+        //             element["value"] == newPostProvider.selectedOccasion,
+        //       )["icon"],
+        // ),
+        ElevatedButton(
           onPressed: () {},
-          label: Text(
-            newPostProvider
-                .getOccasionsOptions(context)
-                .firstWhere(
-                  (element) =>
-                      element["value"] == newPostProvider.selectedOccasion,
-                )["label"]
-                .toString(),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              newPostProvider
+                  .getOccasionsOptions(context)
+                  .firstWhere(
+                    (element) =>
+                        element["value"] == newPostProvider.selectedOccasion,
+                  )["icon"],
+
+              const SizedBox(width: 5),
+
+              Text(
+                newPostProvider
+                    .getOccasionsOptions(context)
+                    .firstWhere(
+                      (element) =>
+                          element["value"] == newPostProvider.selectedOccasion,
+                    )["label"]
+                    .toString(),
+              ),
+
+              const SizedBox(width: 8),
+
+              GestureDetector(
+                onTap: () {
+                  context.read<NewPostProvider>().removeOccasion();
+                },
+                child: const Icon(Icons.close, size: 18),
+              ),
+            ],
           ),
-          icon: newPostProvider
-              .getOccasionsOptions(context)
-              .firstWhere(
-                (element) =>
-                    element["value"] == newPostProvider.selectedOccasion,
-              )["icon"],
         ),
       ],
     );

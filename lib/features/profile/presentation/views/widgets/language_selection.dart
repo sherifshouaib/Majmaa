@@ -20,7 +20,7 @@ class LanguageSelection extends StatelessWidget {
         if (value == null) {
           return;
         }
-        appSettingsProvider.updateCurrentLanguage(value!);
+        appSettingsProvider.updateCurrentLanguage(value);
       },
     );
   }

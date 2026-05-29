@@ -108,7 +108,7 @@ class _UpdatePasswordViewBodyState extends State<UpdatePasswordViewBody> {
             controller: passwordController,
             obscureText: true,
             decoration: InputDecoration(
-              hintText: AppLocale.new_password_label.getString(context),
+              hintText: AppLocale.newPasswordLabel.getString(context),
             ),
           ),
           SizedBox(height: 10),
@@ -116,7 +116,7 @@ class _UpdatePasswordViewBodyState extends State<UpdatePasswordViewBody> {
             controller: confirmController,
             obscureText: true,
             decoration: InputDecoration(
-              hintText: AppLocale.confirm_password_label.getString(context),
+              hintText: AppLocale.confirmPasswordLabel.getString(context),
             ),
           ),
           SizedBox(height: 20),
@@ -124,7 +124,7 @@ class _UpdatePasswordViewBodyState extends State<UpdatePasswordViewBody> {
             onPressed: isLoading ? null : updatePassword,
             child: isLoading
                 ? const ProgressRing()
-                : Text(AppLocale.update_label.getString(context)),
+                : Text(AppLocale.updateLabel.getString(context)),
           ),
           // ElevatedButton(onPressed: updatePassword, child: Text("Update")),
         ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:merhaba/core/utils/providers/timeline_provider.dart';
 import 'package:merhaba/features/home/presentation/views/widgets/home_tab_view_appbar.dart';
 import 'package:merhaba/features/home/presentation/views/widgets/home_tab_view_body.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:merhaba/core/utils/providers/app_settings_provider.dart';
 
 class ThemeSelection extends StatelessWidget {

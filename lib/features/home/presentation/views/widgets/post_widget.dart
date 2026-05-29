@@ -39,7 +39,7 @@ class PostWidget extends StatefulWidget {
 }
 
 class _PostWidgetState extends State<PostWidget> {
-  CarouselSliderController _controller = CarouselSliderController();
+  final CarouselSliderController _controller = CarouselSliderController();
   int currentIndex = 0;
 
   // final baseUrl =
@@ -50,7 +50,7 @@ class _PostWidgetState extends State<PostWidget> {
   List<Map<String, dynamic>> reactions = [];
   Map<String, dynamic> myReaction = {};
 
-  int commentsCount = 0;
+  // int commentsCount = 0;
 
   Future<void> getPostInteractions() async {
     try {
@@ -85,24 +85,24 @@ class _PostWidgetState extends State<PostWidget> {
     }
   }
 
-  Future<void> getCommentsCount() async {
-    try {
-      var res = await CommentsController.getCommentsCountForPost(
-        widget.post["id"],
-      );
+  // Future<void> getCommentsCount() async {
+  //   try {
+  //     var res = await CommentsController.getCommentsCountForPost(
+  //       widget.post["id"],
+  //     );
 
-      setState(() {
-        commentsCount = res;
-      });
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
+  //     setState(() {
+  //       commentsCount = res;
+  //     });
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   }
+  // }
 
   Future<void> getData() async {
     await getPostInteractions();
 
-    await getCommentsCount();
+    //  await getCommentsCount();
   }
 
   @override
@@ -165,6 +165,8 @@ class _PostWidgetState extends State<PostWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -256,9 +258,7 @@ class _PostWidgetState extends State<PostWidget> {
                                                   .currentLocale
                                                   .localeIdentifier,
 
-                                        //  "${localization.currentLocale.localeIdentifier}_short",
                                       ),
-                                      // widget.post["username"].toString(),
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         fontSize: 11,
@@ -279,7 +279,11 @@ class _PostWidgetState extends State<PostWidget> {
                           ),
                         ],
                       ),
+                  
+                  
                       verticalSpace(5),
+
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -298,7 +302,11 @@ class _PostWidgetState extends State<PostWidget> {
                           ),
                         ],
                       ),
+                   
                       verticalSpace(5),
+
+
+
 
                       widget.post["parsedContent"]["media"].toString() == "" ||
                               widget.post["parsedContent"]["media"].isEmpty
@@ -411,7 +419,10 @@ class _PostWidgetState extends State<PostWidget> {
                               ],
                             ),
 
+
                       verticalSpace(10),
+
+
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -421,7 +432,7 @@ class _PostWidgetState extends State<PostWidget> {
                                 (MediaQuery.sizeOf(context).width - 60) * 0.33,
 
                             child: Text(
-                              "${reactions.length} ${AppLocale.reactions_label.getString(context)}",
+                              "${reactions.length} ${AppLocale.reactionsLabel.getString(context)}",
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -434,7 +445,7 @@ class _PostWidgetState extends State<PostWidget> {
                                 (MediaQuery.sizeOf(context).width - 60) * 0.33,
 
                             child: Text(
-                              "$commentsCount ${AppLocale.comments_label.getString(context)}",
+                              "${widget.post["commentsCount"] ?? 0} ${AppLocale.commentsLabel.getString(context)}",
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -447,7 +458,7 @@ class _PostWidgetState extends State<PostWidget> {
                                 (MediaQuery.sizeOf(context).width - 60) * 0.33,
 
                             child: Text(
-                              "0 ${AppLocale.shares_label.getString(context)}",
+                              "0 ${AppLocale.sharesLabel.getString(context)}",
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -457,12 +468,18 @@ class _PostWidgetState extends State<PostWidget> {
                         ],
                       ),
 
+
+
+
+
                       //  if (widget.showActions) Divider(),
                       if (widget.showActions) verticalSpace(5),
                       if (widget.showActions)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+
+                            
                             Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 15,
@@ -564,11 +581,7 @@ class _PostWidgetState extends State<PostWidget> {
                                         widget.post["id"],
                                         reactions,
                                       );
-                                      // setState(() {
-                                      //   isReacted = false;
-                                      //   myReaction = {};
-                                      //   selectedReaction = "like";
-                                      // });
+                                     
                                     } catch (e) {
                                       debugPrint(e.toString());
                                     }
@@ -600,6 +613,8 @@ class _PostWidgetState extends State<PostWidget> {
                               ),
                             ),
 
+
+
                             ElevatedButton.icon(
                               onPressed: () {
                                 if (widget.canNavigate) {
@@ -625,7 +640,7 @@ class _PostWidgetState extends State<PostWidget> {
                                 }
                               },
                               label: Text(
-                                AppLocale.comment_label.getString(context),
+                                AppLocale.commentLabel.getString(context),
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -644,10 +659,12 @@ class _PostWidgetState extends State<PostWidget> {
                               ),
                             ),
 
+
+
                             ElevatedButton.icon(
                               onPressed: () {},
                               label: Text(
-                                AppLocale.share_label.getString(context),
+                                AppLocale.shareLabel.getString(context),
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -665,6 +682,9 @@ class _PostWidgetState extends State<PostWidget> {
                                 // ),
                               ),
                             ),
+                        
+                        
+                        
                           ],
                         ),
                     ],

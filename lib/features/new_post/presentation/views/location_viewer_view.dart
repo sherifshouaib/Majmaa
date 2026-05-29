@@ -19,7 +19,7 @@ class LocationViewerView extends StatelessWidget {
           : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocale.location_viewer_label.getString(context)),
+          title: Text(AppLocale.locationViewerLabel.getString(context)),
           centerTitle: true,
         ),
         body: LocationViewerViewBody(

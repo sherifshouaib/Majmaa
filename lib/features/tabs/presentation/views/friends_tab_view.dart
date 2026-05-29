@@ -10,7 +10,7 @@ class FriendsTabView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(AppLocale.friends_label.getString(context)),
+        title: Text(AppLocale.friendsLabel.getString(context)),
       ),
     );
   }

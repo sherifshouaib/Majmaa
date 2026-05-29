@@ -17,7 +17,7 @@ class UpdatePasswordView extends StatelessWidget {
         appBar: AppBar(
           title: Padding(
             padding: const EdgeInsets.only(top: 10.0),
-            child: Text(AppLocale.update_password_label.getString(context)),
+            child: Text(AppLocale.updatePasswordLabel.getString(context)),
           ),
         ),
         body: UpdatePasswordViewBody(),

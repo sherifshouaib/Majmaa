@@ -26,7 +26,7 @@ class ListTileOccasionSelection extends StatelessWidget {
               builder: (context, setState) {
                 return fluent.ContentDialog(
                   title: Text(
-                    AppLocale.occasion_label.getString(context),
+                    AppLocale.occasionLabel.getString(context),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -68,13 +68,13 @@ class ListTileOccasionSelection extends StatelessWidget {
 
                         GoRouter.of(dialogContext).pop();
                       },
-                      child: Text(AppLocale.confirm_label.getString(context)),
+                      child: Text(AppLocale.confirmLabel.getString(context)),
                     ),
                     FilledButton(
                       onPressed: () {
                         GoRouter.of(dialogContext).pop();
                       },
-                      child: Text(AppLocale.cancel_label.getString(context)),
+                      child: Text(AppLocale.cancelLabel.getString(context)),
                     ),
                   ],
                 );
@@ -84,7 +84,7 @@ class ListTileOccasionSelection extends StatelessWidget {
         );
       },
       title: Text(
-        AppLocale.occasion_label.getString(context),
+        AppLocale.occasionLabel.getString(context),
         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
     );

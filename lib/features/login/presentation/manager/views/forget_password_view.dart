@@ -19,7 +19,7 @@ class ForgotPasswordView extends StatelessWidget {
             title: Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Text(
-                AppLocale.forget_password_appbar_label.getString(context),
+                AppLocale.forgetPasswordAppbarLabel.getString(context),
               ),
             ),
           ),

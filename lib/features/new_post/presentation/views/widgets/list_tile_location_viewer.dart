@@ -33,7 +33,7 @@ class ListTileLocationViewer extends StatelessWidget {
         }
       },
       title: Text(
-        AppLocale.location_label.getString(context),
+        AppLocale.locationLabel.getString(context),
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
       ),
     );

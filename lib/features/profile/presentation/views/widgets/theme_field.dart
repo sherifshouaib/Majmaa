@@ -11,7 +11,7 @@ class ThemeField extends StatelessWidget {
     return SizedBox(
       width: (MediaQuery.sizeOf(context).width - 60) * 0.45,
       child: Text(
-        AppLocale.dark_mode_label.getString(context),
+        AppLocale.darkModeLabel.getString(context),
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
 
         overflow: TextOverflow.ellipsis,

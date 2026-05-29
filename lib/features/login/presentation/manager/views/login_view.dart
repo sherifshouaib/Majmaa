@@ -43,25 +43,25 @@ class LoginView extends StatelessWidget {
 
                     CustomInfoLabel(
                       funcController: emailController,
-                      label: AppLocale.enter_your_email_label.getString(
+                      label: AppLocale.enterYourEmailLabel.getString(
                         context,
                       ),
-                      placeholder: AppLocale.email_label.getString(context),
+                      placeholder: AppLocale.emailLabel.getString(context),
                     ),
                     verticalSpace(15),
 
                     CustomInfoLabel(
                       funcController: passController,
-                      label: AppLocale.enter_your_password_label.getString(
+                      label: AppLocale.enterYourPasswordLabel.getString(
                         context,
                       ),
-                      placeholder: AppLocale.password_label.getString(context),
+                      placeholder: AppLocale.passwordLabel.getString(context),
                       obsecure: true,
                     ),
 
                     verticalSpace(20),
                     RowLogCreateAcc(
-                      textButton: AppLocale.login_label.getString(context),
+                      textButton: AppLocale.loginLabel.getString(context),
                       onPressed: () async {
                         if (emailController.text == "") {
                           Fluttertoast.showToast(
@@ -108,7 +108,7 @@ class LoginView extends StatelessWidget {
                     verticalSpace(10),
 
                     RowTextButton(
-                      buttonText: AppLocale.create_account_label.getString(
+                      buttonText: AppLocale.createAccountLabel.getString(
                         context,
                       ),
                     ),

@@ -18,7 +18,7 @@ class AppSettingsView extends StatelessWidget {
           : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocale.app_settings_label.getString(context)),
+          title: Text(AppLocale.appSettingsLabel.getString(context)),
         ),
         body: AppSettingsViewBody(appSettingsProvider: appSettingsProvider),
       ),

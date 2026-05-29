@@ -16,7 +16,7 @@ class TypingPostLabel extends StatelessWidget {
         isDense: true,
         contentPadding: const EdgeInsets.all(0),
         border: const OutlineInputBorder(borderSide: BorderSide.none),
-        hintText: AppLocale.type_something_label.getString(context),
+        hintText: AppLocale.typeSomethingLabel.getString(context),
       ),
 
       // minLines: 3,

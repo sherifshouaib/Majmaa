@@ -89,4 +89,15 @@ class PostsController {
       return {"result": false, "message": e.toString()};
     }
   }
+
+  static Future<bool> deletePostMedia(String fileName) async {
+    try {
+      await Supabase.instance.client.storage.from("Posts").remove([fileName]);
+
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
 }
