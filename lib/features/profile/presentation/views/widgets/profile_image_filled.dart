@@ -15,6 +15,9 @@ class ProfileImageFilled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+      '${profileTabProvider.photoUrl}/////////////////////////////////',
+    );
     return CachedNetworkImage(
       imageUrl: profileTabProvider.photoUrl,
       imageBuilder: (context, imageProvider) => Container(

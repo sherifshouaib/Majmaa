@@ -30,8 +30,16 @@ class PostProvider with ChangeNotifier {
   String _addMediaUrl = "";
   String get addMediaUrl => _addMediaUrl;
 
-  void setAddMediaUrl(String value) {
-    _addMediaUrl = value;
+  String _addMediaFileName = "";
+  String get addMediaFileName => _addMediaFileName;
+
+  // void setAddMediaUrl(String value) {
+  //   _addMediaUrl = value;
+  //   notifyListeners();
+  // }
+  void setAddMedia({required String url, required String fileName}) {
+    _addMediaUrl = url;
+    _addMediaFileName = fileName;
     notifyListeners();
   }
 
@@ -83,6 +91,7 @@ class PostProvider with ChangeNotifier {
       var res = await CommentsController.addComment({
         "content": jsonEncode(content),
         "post_id": _currentPost["id"],
+        "file_name": "",
       });
       if (res["result"] == true) {
         Fluttertoast.showToast(
@@ -139,7 +148,12 @@ class PostProvider with ChangeNotifier {
       var res = await CommentsController.addComment({
         "content": jsonEncode(content),
         "post_id": _currentPost["id"],
+        "file_name": _addMediaFileName,
       });
+      // var res = await CommentsController.addComment({
+      //   "content": jsonEncode(content),
+      //   "post_id": _currentPost["id"],
+      // });
       if (res["result"] == true) {
         Fluttertoast.showToast(
           msg: AppLocale.commentedSuccessfullyLabel.getString(context),
@@ -175,7 +189,12 @@ class PostProvider with ChangeNotifier {
       var res = await CommentsController.addComment({
         "content": jsonEncode(content),
         "post_id": _currentPost["id"],
+        "file_name": _addMediaFileName,
       });
+      // var res = await CommentsController.addComment({
+      //   "content": jsonEncode(content),
+      //   "post_id": _currentPost["id"],
+      // });
       if (res["result"] == true) {
         Fluttertoast.showToast(
           msg: AppLocale.commentedSuccessfullyLabel.getString(context),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:merhaba/main_development.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthController {
- 
-
   static Future<void> setAuth(Map<String, dynamic> data) async {
     try {
       await secureStorage.write(key: "is_logged_in", value: true.toString());
@@ -168,6 +167,36 @@ class AuthController {
         UserAttributes(data: {...data}),
       );
       return {"result": true, "message": "Updated successfully ... "};
+    } catch (e) {
+      debugPrint(e.toString());
+      return {"result": false, "message": e.toString()};
+    }
+  }
+
+  static Future<Map<String, dynamic>> deleteAccount() async {
+    try {
+      final supabase = Supabase.instance.client;
+
+      final response = await supabase.functions.invoke(
+        'delete-account',
+        headers: {
+          "Authorization":
+              "Bearer ${supabase.auth.currentSession!.accessToken}",
+        },
+      );
+
+      if (response.status == 200) {
+        await supabase.auth.signOut();
+        await purgeAuth(); // أهم خطوة عندك
+
+        Fluttertoast.showToast(msg: "Account deleted successfully");
+
+        return {"result": true};
+      } else {
+        Fluttertoast.showToast(msg: "Failed to delete account");
+
+        return {"result": false};
+      }
     } catch (e) {
       debugPrint(e.toString());
       return {"result": false, "message": e.toString()};

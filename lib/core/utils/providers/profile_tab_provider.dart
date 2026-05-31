@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:merhaba/core/utils/controllers/auth_controller.dart';
 
@@ -48,6 +49,14 @@ class ProfileTabProvider with ChangeNotifier {
         _photoUrl = userData["picUrl"] == null
             ? ""
             : userData["picUrl"].toString();
+
+        // 🔥 preload image to cache
+        if (_photoUrl.isNotEmpty) {
+          await CachedNetworkImageProvider(
+            _photoUrl,
+          ).resolve(const ImageConfiguration());
+        }
+
         notifyListeners();
         // debugPrint(res['data']);
       }

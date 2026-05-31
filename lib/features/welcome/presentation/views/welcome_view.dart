@@ -6,6 +6,9 @@ import 'package:merhaba/core/routing/app_router.dart';
 import 'package:merhaba/core/utils/controllers/auth_controller.dart';
 import 'package:merhaba/core/utils/funcs/getPostsAndNavigate_method.dart';
 import 'package:merhaba/core/widgets/logo_boarding_light.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/utils/providers/profile_tab_provider.dart';
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -35,7 +38,13 @@ class _WelcomeViewState extends State<WelcomeView> {
     try {
       var res = await AuthController.checkLogin();
       if (res["result"] == true) {
-        getPostsAndNavigateMethod(context);
+        // final profileTabProvider = Provider.of<ProfileTabProvider>(
+        //   context,
+        //   listen: false,
+        // );
+
+        // await profileTabProvider.getData();
+        getUserImage_GetPosts_NavigationMethod(context);
       } else {
         context.go(AppRouter.kLoginView);
       }

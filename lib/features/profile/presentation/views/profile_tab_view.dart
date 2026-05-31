@@ -204,7 +204,9 @@ class ProfileTabView extends StatelessWidget {
             verticalSpace(10),
             ProfileOptionsInkWell(
               text: AppLocale.accountSettingsLabel.getString(context),
-              ontap: () {},
+              ontap: () {
+                GoRouter.of(context).push(AppRouter.kAccountSettingsView);
+              },
             ),
             verticalSpace(5),
             ProfileOptionsInkWell(
@@ -214,7 +216,7 @@ class ProfileTabView extends StatelessWidget {
                   context,
                   listen: false,
                 );
-                 appSettingsProvider.getCurrentLanguage();
+                appSettingsProvider.getCurrentLanguage();
                 appSettingsProvider.setIsDark(Globals.theme == "Dark");
                 GoRouter.of(context).push(AppRouter.kAppSettingsView);
               },

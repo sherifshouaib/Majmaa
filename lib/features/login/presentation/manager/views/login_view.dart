@@ -14,6 +14,8 @@ import 'package:merhaba/features/login/presentation/manager/views/widgets/forget
 import 'package:merhaba/main_development.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/utils/providers/profile_tab_provider.dart';
+
 class LoginView extends StatelessWidget {
   LoginView({super.key});
 
@@ -43,9 +45,7 @@ class LoginView extends StatelessWidget {
 
                     CustomInfoLabel(
                       funcController: emailController,
-                      label: AppLocale.enterYourEmailLabel.getString(
-                        context,
-                      ),
+                      label: AppLocale.enterYourEmailLabel.getString(context),
                       placeholder: AppLocale.emailLabel.getString(context),
                     ),
                     verticalSpace(15),
@@ -86,9 +86,15 @@ class LoginView extends StatelessWidget {
                           );
 
                           if (res["result"] == true) {
-                            getPostsAndNavigateMethod(context);
+                            // final profileTabProvider =
+                            //     Provider.of<ProfileTabProvider>(
+                            //       context,
+                            //       listen: false,
+                            //     );
 
-                          
+                            // await profileTabProvider.getData();
+
+                            getUserImage_GetPosts_NavigationMethod(context);
                           } else {
                             Fluttertoast.showToast(
                               msg: res["message"].toString(),

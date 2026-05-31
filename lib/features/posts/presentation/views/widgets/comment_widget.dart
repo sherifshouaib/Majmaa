@@ -17,7 +17,6 @@ class CommentWidget extends StatelessWidget {
   CommentWidget({super.key, required this.comment});
 
   Map<String, dynamic> comment = {};
-  //Map<String, dynamic> post = {};
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +114,6 @@ class CommentWidget extends StatelessWidget {
                                         'en'
                                   ? 'en_short'
                                   : localization.currentLocale.localeIdentifier,
-
-                              //  "${localization.currentLocale.localeIdentifier}_short",
                             ),
                             // widget.post["username"].toString(),
                             textAlign: TextAlign.start,
@@ -182,13 +179,7 @@ class CommentWidget extends StatelessWidget {
               )
             else if (parsedContent["media"]["type"] == "video")
               InkWell(
-                onTap: () {
-                  // GoRouter.of(context).push(
-                  //   AppRouter.kPhotoViewerScreen,
-
-                  //   extra: parsedContent["media"]["url"].toString(),
-                  // );
-                },
+                onTap: () {},
                 child: SizedBox(
                   width: (MediaQuery.sizeOf(context).width - 60) * 0.6 - 10,
 

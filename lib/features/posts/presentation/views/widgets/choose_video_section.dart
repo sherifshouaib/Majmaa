@@ -68,9 +68,13 @@ class ChooseVideoSection extends StatelessWidget {
                                     File(file.path),
                                   );
                               if (res["result"] == true) {
-                                postProvider.setAddMediaUrl(
-                                  res["url"].toString(),
+                                postProvider.setAddMedia(
+                                  url: res["url"].toString(),
+                                  fileName: res["fileName"].toString(),
                                 );
+                                // postProvider.setAddMediaUrl(
+                                //   res["url"].toString(),
+                                // );
 
                                 await postProvider.onAddVideo(
                                   parentDialogContext,
@@ -116,9 +120,13 @@ class ChooseVideoSection extends StatelessWidget {
                                     File(file.path),
                                   );
                               if (res["result"] == true) {
-                                postProvider.setAddMediaUrl(
-                                  res["url"].toString(),
+                                postProvider.setAddMedia(
+                                  url: res["url"].toString(),
+                                  fileName: res["fileName"].toString(),
                                 );
+                                // postProvider.setAddMediaUrl(
+                                //   res["url"].toString(),
+                                // );
 
                                 await postProvider.onAddVideo(
                                   parentDialogContext,

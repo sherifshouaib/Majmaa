@@ -40,4 +40,3 @@ class HomeTabViewBody extends StatelessWidget {
     );
   }
 }
-

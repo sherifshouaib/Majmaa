@@ -29,7 +29,7 @@ class _NewPostViewState extends State<NewPostView> {
   Widget build(BuildContext context) {
     final profileTabProvider = Provider.of<ProfileTabProvider>(
       context,
-      listen: false,
+    //  listen: false,
     );
 
     final newPostProvider = Provider.of<NewPostProvider>(context);

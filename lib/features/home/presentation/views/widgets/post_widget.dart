@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 import 'package:merhaba/core/helper/spacing.dart';
 import 'package:merhaba/core/locale/app_locale.dart';
 import 'package:merhaba/core/routing/app_router.dart';
-import 'package:merhaba/core/utils/controllers/comments_controller.dart';
 import 'package:merhaba/core/utils/controllers/post_interactions_controller.dart';
 import 'package:merhaba/core/utils/providers/post_provider.dart';
 import 'package:merhaba/core/utils/providers/profile_tab_provider.dart';
@@ -698,3 +697,314 @@ class _PostWidgetState extends State<PostWidget> {
     );
   }
 }
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_reaction_button/flutter_reaction_button.dart';
+// import 'package:go_router/go_router.dart';
+// import 'package:merhaba/core/helper/spacing.dart';
+// import 'package:merhaba/core/routing/app_router.dart';
+// import 'package:merhaba/core/utils/controllers/post_interactions_controller.dart';
+// import 'package:merhaba/core/utils/providers/post_provider.dart';
+// import 'package:merhaba/core/utils/providers/timeline_provider.dart';
+// import 'package:merhaba/features/home/presentation/views/widgets/upper_body_of_post.dart';
+// import 'package:provider/provider.dart';
+
+// import '../../../../../core/utils/globals.dart';
+// import 'comment_elevated_button.dart';
+// import 'post_interactions_numbers.dart';
+// import 'post_media.dart';
+// import 'post_text.dart';
+// import 'share_elevated_button.dart';
+
+// class PostWidget extends StatefulWidget {
+//   const PostWidget({
+//     super.key,
+//     required this.post,
+//     this.showActions = true,
+//     this.canNavigate = true,
+//   });
+
+//   final Map<String, dynamic> post;
+//   final bool showActions;
+//   final bool canNavigate;
+
+//   @override
+//   State<PostWidget> createState() => _PostWidgetState();
+// }
+
+// class _PostWidgetState extends State<PostWidget> {
+//   bool isReacted = false;
+//   String selectedReaction = "like";
+//   List<Map<String, dynamic>> reactions = [];
+//   Map<String, dynamic> myReaction = {};
+
+//   // int commentsCount = 0;
+
+//   Future<void> getPostInteractions() async {
+//     try {
+//       var res = await PostInteractionsController.getPostInteractions(
+//         widget.post["id"],
+//       );
+
+//       if (res["result"] == true) {
+//         reactions = [];
+//         myReaction = {};
+//         isReacted = false;
+//         selectedReaction = "like";
+
+//         setState(() {
+//           reactions = (res["data"] as List)
+//               .map((d) => Map<String, dynamic>.from(d as Map))
+//               .toList();
+//           if (reactions
+//               .where((element) => element["isMine"] == true)
+//               .isNotEmpty) {
+//             myReaction = reactions.firstWhere(
+//               (element) => element["isMine"] == true,
+//             );
+
+//             selectedReaction = myReaction["react_type"].toString();
+//             isReacted = true;
+//           }
+//         });
+//       }
+//     } catch (e) {
+//       debugPrint(e.toString());
+//     }
+//   }
+
+//   Future<void> getData() async {
+//     await getPostInteractions();
+//   }
+
+//   @override
+//   void didUpdateWidget(covariant PostWidget oldWidget) {
+//     super.didUpdateWidget(oldWidget);
+
+//     if (oldWidget.post["id"] != widget.post["id"] ||
+//         oldWidget.post["reactions"] != widget.post["reactions"]) {
+//       getPostInteractions();
+//     }
+//   }
+
+//   @override
+//   initState() {
+//     super.initState();
+//     getData();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final timeLineProvider = Provider.of<TimelineProvider>(
+//       context,
+//       listen: true,
+//     );
+//     return Card(
+//       child: InkWell(
+//         onTap: () async {
+//           if (widget.canNavigate) {
+//             final postProvider = Provider.of<PostProvider>(
+//               context,
+//               listen: false,
+//             );
+//             postProvider.setCurrentPost(widget.post);
+//             postProvider.getData();
+//             GoRouter.of(context).push(AppRouter.kPostView);
+//           }
+//         },
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           children: [
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   width: MediaQuery.sizeOf(context).width - 28,
+
+//                   decoration: BoxDecoration(
+//                     color: Colors.blueGrey.withValues(alpha: 0.25),
+
+//                     //  .withOpacity(0.25),
+//                     borderRadius: BorderRadius.circular(5),
+//                   ),
+//                   padding: EdgeInsets.all(5),
+//                   child: Column(
+//                     mainAxisSize: MainAxisSize.min,
+//                     children: [
+//                       UpperBodyOfPost(widget: widget),
+
+//                       verticalSpace(5),
+
+//                       PostText(widget: widget),
+
+//                       verticalSpace(5),
+
+//                       widget.post["parsedContent"]["media"].toString() == "" ||
+//                               widget.post["parsedContent"]["media"].isEmpty
+//                           ? Container()
+//                           : PostMedia(widget: widget),
+
+//                       verticalSpace(10),
+
+//                       PostInteractionsNumbers(
+//                         reactions: reactions,
+//                         widget: widget,
+//                       ),
+
+//                       //  if (widget.showActions) Divider(),
+//                       if (widget.showActions) verticalSpace(5),
+//                       if (widget.showActions)
+//                         Row(
+//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                           children: [
+//                             Container(
+//                               padding: EdgeInsets.symmetric(
+//                                 horizontal: 15,
+//                                 vertical: 5,
+//                               ),
+//                               decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(15),
+//                                 color: isReacted
+//                                     ? Colors.blueGrey.withValues(alpha: 0.5)
+//                                     //   .withOpacity(0.5)
+//                                     : Colors.transparent,
+//                               ),
+//                               child: ReactionButton<String>(
+//                                 boxColor: Globals.theme == "Light"
+//                                     ? Colors.white
+//                                     : Colors.black,
+//                                 itemSize: Size(30, 30),
+
+//                                 onReactionChanged: (Reaction<String>? reaction) async {
+//                                   //debugPrint('Selected value: ${reaction?.value}');
+
+//                                   if (reaction == null) {
+//                                     return;
+//                                   }
+//                                   if (reaction.value == null) {
+//                                     return;
+//                                   }
+
+//                                   if (isReacted == false) {
+//                                     setState(() {
+//                                       selectedReaction = reaction.value!;
+//                                       isReacted = true;
+//                                     });
+
+//                                     await PostInteractionsController.addReactionToPost(
+//                                       widget.post["id"],
+//                                       reaction.value!,
+//                                     );
+//                                     await getPostInteractions();
+//                                     timeLineProvider.updatePostReactions(
+//                                       widget.post["id"],
+//                                       reactions,
+//                                     );
+//                                   } else {
+//                                     setState(() {
+//                                       selectedReaction = reaction.value!;
+//                                       isReacted = true;
+//                                     });
+
+//                                     await PostInteractionsController.updateReactionToPost(
+//                                       myReaction["id"],
+//                                       reaction.value!,
+//                                     );
+//                                     await getPostInteractions();
+//                                     timeLineProvider.updatePostReactions(
+//                                       widget.post["id"],
+//                                       reactions,
+//                                     );
+//                                   }
+//                                 },
+//                                 reactions: <Reaction<String>>[
+//                                   ...timeLineProvider
+//                                       .getAvailableReactions(context)
+//                                       .map(
+//                                         (reaction) => Reaction<String>(
+//                                           value: reaction["value"],
+//                                           icon: reaction["icon"],
+//                                           title: Text(
+//                                             reaction["text"],
+//                                             //style: TextStyle(fontSize: 12),
+//                                           ),
+//                                         ),
+//                                       ),
+//                                 ],
+
+//                                 placeholder: Reaction<String>(
+//                                   value: timeLineProvider
+//                                       .getAvailableReactions(context)
+//                                       .first["value"],
+//                                   icon: timeLineProvider
+//                                       .getAvailableReactions(context)
+//                                       .first["icon"],
+//                                   title: Text(
+//                                     timeLineProvider
+//                                         .getAvailableReactions(context)
+//                                         .first["text"],
+//                                   ),
+//                                 ),
+
+//                                 isChecked: isReacted,
+//                                 child: InkWell(
+//                                   onTap: () async {
+//                                     try {
+//                                       await PostInteractionsController.removeReactionToPost(
+//                                         widget.post["id"],
+//                                       );
+//                                       await getPostInteractions();
+//                                       timeLineProvider.updatePostReactions(
+//                                         widget.post["id"],
+//                                         reactions,
+//                                       );
+//                                     } catch (e) {
+//                                       debugPrint(e.toString());
+//                                     }
+//                                   },
+//                                   child: Row(
+//                                     children: [
+//                                       timeLineProvider
+//                                           .getAvailableReactions(context)
+//                                           .where(
+//                                             (reaction) =>
+//                                                 reaction["value"] ==
+//                                                 selectedReaction,
+//                                           )
+//                                           .first["icon"],
+//                                       horizontalSpace(5),
+//                                       Text(
+//                                         timeLineProvider
+//                                             .getAvailableReactions(context)
+//                                             .where(
+//                                               (reaction) =>
+//                                                   reaction["value"] ==
+//                                                   selectedReaction,
+//                                             )
+//                                             .first["text"],
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+//                             ),
+
+//                             CommentElevatedButton(widget: widget),
+
+//                             ShareElevatedButton(),
+//                           ],
+//                         ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -11,6 +11,8 @@ import 'package:merhaba/features/login/presentation/manager/views/login_view.dar
 import 'package:merhaba/features/create_account/presentation/views/create_account_view.dart';
 import 'package:merhaba/features/welcome/presentation/views/welcome_view.dart';
 
+import '../../features/profile/presentation/views/account_settings_view.dart';
+
 abstract class AppRouter {
   static const kBottomNavigationPage = '/bottomNavigationPage';
   static const kLoginView = '/loginView';
@@ -24,11 +26,17 @@ abstract class AppRouter {
   static const klocationViewerView = '/locationViewerView';
   static const kPhotoViewerScreen = '/photoViewerScreen';
   static const kPostView = '/postView';
+  static const kAccountSettingsView = '/accountSettingsView';
 
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const WelcomeView()),
       GoRoute(path: kLoginView, builder: (context, state) => LoginView()),
+      GoRoute(
+        path: kAccountSettingsView,
+        builder: (context, state) => AccountSettingsView(),
+      ),
+
       GoRoute(
         path: kCreateAccountView,
         builder: (context, state) => CreateAccountView(),
